@@ -1433,101 +1433,83 @@ body {
 
 .rp-contact-item a:hover { color: var(--denq-pink); }
 
-/* ── RESPONSIVE — WIDE TABLET (hide left panel only) ────────────── */
+/* ── RESPONSIVE — WIDE TABLET (hide left panel only) ─────────── */
 @media (max-width: 1100px) {
     .left-panel { display: none; }
     .dashboard-layout { gap: 16px; }
     .chat-container { max-width: 560px; }
 }
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════════
    TABLET & MOBILE  (≤820px)
-   – Fully flexible: chat height = % of the VISIBLE viewport (dvh)
-   – dvh auto-adjusts for iOS address bar, Android chrome bar, etc.
-   – Page scrolls down to reveal company panels below the chat
-   ═══════════════════════════════════════════════════════════════════ */
+   – Page scrolls freely; panels stack below the chat
+   – chat-messages gets a reliable clamp() height — always visible
+   ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 820px) {
+
+    /* Allow natural page scroll */
     html, body {
         height: auto;
+        min-height: 100vh;
         overflow-y: auto;
     }
 
+    /* Stack panels vertically — break out of desktop flex-fill */
     .dashboard-layout {
+        flex: none;                  /* stop trying to fill body height */
         flex-direction: column;
         align-items: stretch;
         padding: 12px;
         gap: 14px;
-        height: auto;
     }
 
-    /* ── Chat box ── */
+    /* Chat goes first — sized naturally by its children */
     .chat-container {
         order: 1;
         width: 100%;
         max-width: 100%;
+        flex: none;                  /* stop competing for flex space */
         border-radius: 16px;
-        height: 72vh;           /* fallback for older browsers */
-        height: 72dvh;          /* dynamic: shrinks when address bar shows */
-        display: flex;
-        flex-direction: column;
-        min-height: 0;
     }
 
-    /* Header & input bar stay fixed size */
-    .chat-header       { flex-shrink: 0; border-radius: 16px 16px 0 0; }
-    .chat-input-area   { flex-shrink: 0; border-radius: 0 0 16px 16px; padding: 12px 14px; }
+    .chat-header     { flex-shrink: 0; border-radius: 16px 16px 0 0; }
+    .chat-input-area { flex-shrink: 0; border-radius: 0 0 16px 16px; padding: 12px 14px; }
 
-    /* Messages fill ALL remaining space inside the chat box */
+    /* Messages: generous height, always scrollable — no flex tricks */
     .chat-messages {
-        flex: 1;
-        min-height: 0;          /* critical — lets flex child scroll */
+        height: clamp(420px, 62vh, 600px);
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         padding: 16px;
     }
 
-    /* ── Panels below chat ── */
-    .right-panel {
-        order: 2;
-        width: 100%;
-        max-width: 100%;
-        display: block;
-    }
+    /* Panels stack below chat */
+    .right-panel { order: 2; width: 100%; max-width: 100%; display: block; }
+    .left-panel  { order: 3; width: 100%; max-width: 100%; display: flex !important; }
+    .side-panel  { width: 100%; border-radius: 14px; }
 
-    .left-panel {
-        order: 3;
-        width: 100%;
-        max-width: 100%;
-        display: flex !important;   /* overrides the 1100px hide */
-    }
-
-    .side-panel { width: 100%; border-radius: 14px; }
-
-    /* ── Buttons & bubbles ── */
+    /* Cards go full-width */
     .message-wrapper    { max-width: 98%; }
     .bot-product-card   { max-width: 100%; }
     .info-guide-card    { max-width: 100%; }
     .faq-card           { max-width: 100%; }
+    .bot-history-card   { max-width: 100%; }
 
+    /* Buttons: always 2 equal columns */
     .btn-chip-container {
         grid-template-columns: repeat(2, 1fr);
         max-width: 100%;
     }
 }
 
-/* ── PHONE  (≤600px) — slightly taller chat, tighter padding ──── */
+/* ── PHONE  (≤600px) ─────────────────────────────────────────── */
 @media (max-width: 600px) {
     .dashboard-layout   { padding: 8px; gap: 10px; }
 
-    .chat-container {
-        height: 70vh;
-        height: 70dvh;
-        border-radius: 14px;
-    }
-
+    .chat-container  { border-radius: 14px; }
     .chat-header     { border-radius: 14px 14px 0 0; }
     .chat-input-area { border-radius: 0 0 14px 14px; padding: 10px 12px; }
-    .chat-messages   { padding: 12px; }
+    .chat-messages   { height: clamp(390px, 60vh, 540px); padding: 12px; }
 
     #user-input { font-size: 16px; }
     .pink-btn   { font-size: 16px; padding: 10px 14px; }
@@ -1539,10 +1521,7 @@ body {
 
 /* ── VERY SMALL PHONES  (≤380px) ─────────────────────────────── */
 @media (max-width: 380px) {
-    .chat-container {
-        height: 68vh;
-        height: 68dvh;
-    }
+    .chat-messages      { height: clamp(340px, 55vh, 460px); }
     .btn-chip           { font-size: 0.72rem; padding: 9px 8px; }
     .btn-chip-container { gap: 6px; }
 }
