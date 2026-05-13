@@ -113,9 +113,31 @@ const PRODUCT_DETAIL = {
     },
     cement_angled: {
         image: 'Angle15.png', sizeImage: 'Angled_Size.png',
-        title: 'Cement – Angled Abutment', subtitle: 'Angular restorative alignment',
+        title: 'Angled Abutment', subtitle: 'Angular restorative alignment',
         details: 'Angled Abutment',
         specs: ['Angles: 15° · 25°', 
+                'Packing Unit: Abutment + Screw', 
+                'Driver: Hex 1.2 Screw Driver', 
+                'Torque: 30 Ncm'
+            ],
+    },
+
+    cement_freemill: {
+        image: 'Freemill.png', sizeImage: 'Angled_Size.png',
+        title: 'Freemill Abutment', subtitle: 'Angular restorative alignment',
+        details: 'Freemill Abutment',
+        specs: [
+                'Packing Unit: Abutment + Screw', 
+                'Driver: Hex 1.2 Screw Driver', 
+                'Torque: 30 Ncm'
+            ],
+    },
+
+    cement_ccm: {
+        image: 'ccm.png', sizeImage: 'Angled_Size.png',
+        title: 'CCM Casting Abutment', subtitle: 'Angular restorative alignment',
+        details: 'CCM Casting Abutment',
+        specs: [
                 'Packing Unit: Abutment + Screw', 
                 'Driver: Hex 1.2 Screw Driver', 
                 'Torque: 30 Ncm'
@@ -130,20 +152,20 @@ const PRODUCT_DETAIL = {
     },
     cement_analog: {
         image: 'FixtureLabAnalog.png', sizeImage: 'FixtureLabAnalog_Size.png',
-        title: 'Lab Analog (Cement)', subtitle: 'Lab replica for model fabrication',
+        title: 'Fixture Level Lab Analog', subtitle: 'Lab replica for model fabrication',
         details: 'Fixture Level Lab Analog',
         specs: ['Packing Unit: Analog'],
     },
     cement_pickup: {
         image: 'pickup.png', sizeImage: 'pickup_Size.png',
-        title: 'Pick-up Impression Coping (Cement)', subtitle: 'Open-tray impression transfer',
+        title: 'Pick-up Impression Coping', subtitle: 'Open-tray impression transfer',
         details: 'Open-tray pick-up coping',
         specs: ['Packing Unit: Impression Coping + Guide pin', 'Driver: Hex 1.2 Screw Driver'],
 
     },
     cement_transfer: {
         image: 'transfer.png', sizeImage: 'Transfer_Size.png',
-        title: 'Transfer Impression Coping (Cement)', subtitle: 'Closed-tray impression transfer',
+        title: 'Transfer Impression Coping', subtitle: 'Closed-tray impression transfer',
         details: 'Closed-tray transfer coping',
         specs: ['Packing Unit: Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
 
