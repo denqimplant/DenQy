@@ -238,6 +238,7 @@ body {
 
 .chat-messages {
     flex-grow: 1;
+    min-height: 0;
     height: clamp(380px, 55vh, 520px);
     padding: 18px;
     overflow-y: auto;
@@ -1456,32 +1457,54 @@ body {
 @media (max-width: 600px) {
     .left-panel, .right-panel { display: none; }
 
+    /* Lock body so only the chat area scrolls — fixes iOS overscroll */
+    html, body {
+        height: 100%;
+        overflow: hidden;
+    }
+
     .dashboard-layout {
+        height: 100vh;          /* fallback for older iOS */
+        height: 100svh;         /* safe viewport — excludes browser chrome */
         padding: 0;
         gap: 0;
         align-items: stretch;
+        overflow: hidden;
     }
 
     .chat-container {
         border-radius: 0;
         box-shadow: none;
         border: none;
-        min-height: 100vh;
-        max-width: 100%;
         width: 100%;
+        max-width: 100%;
+        height: 100%;
+        min-height: 0;          /* required for flex children to shrink */
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
     }
 
     .chat-header {
         border-radius: 0;
         padding: 12px 16px;
+        flex-shrink: 0;         /* header never shrinks */
     }
 
     .chat-messages {
-        height: calc(100vh - 130px);
+        flex: 1;
+        min-height: 0;          /* critical — without this flex won't scroll */
+        height: auto;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;  /* smooth scroll on iOS */
         padding: 14px;
     }
 
-    .chat-input-area { padding: 10px 12px; }
+    .chat-input-area {
+        padding: 10px 12px;
+        flex-shrink: 0;         /* input bar never shrinks */
+    }
+
     #user-input { font-size: 16px; }
     .pink-btn   { font-size: 16px; padding: 10px 14px; }
 
