@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DenQ AI Support</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="dashboard-layout">
+
+        <!-- ── LEFT PANEL ───────────────────────────────────────── -->
+        <aside class="side-panel left-panel">
+            <div class="panel-brand">
+                <img src="../pictures/DenQ_Logo.png" alt="DenQ Logo" class="panel-logo">
+                <p class="panel-tagline">Precision Dental Implants</p>
+            </div>
+
+            <div class="panel-divider"></div>
+
+            <p class="panel-section-title">Product Categories</p>
+            <ul class="quick-links">
+                <li onclick="sidebarNav('🔩 DenQ Fixture', showFixtureDetail)"><span class="icon">🔩</span> DenQ Fixture</li>
+                <li onclick="sidebarNav('🦷 Cement Retained', showCementSubMenu)"><span class="icon">🦷</span> Cement Retained</li>
+                <li onclick="sidebarNav('🔧 Screw Retained', showScrewSubMenu)"><span class="icon">🔧</span> Screw Retained</li>
+                <li onclick="sidebarNav('🦷 Overdenture', showOverdentureSubMenu)"><span class="icon">🦷</span> Overdenture</li>
+                <li onclick="sidebarNav('🧰 Surgical Kits', showSurgicalDetail)"><span class="icon">🧰</span> Surgical Kits</li>
+                <li onclick="sidebarNav('🔬 Endo', showEndoMenu)"><span class="icon">🔬</span> Endo</li>
+            </ul>
+
+            <div class="panel-certs">
+                <span class="cert-badge">FDA ✓</span>
+                <span class="cert-badge">ISO 13485 ✓</span>
+                <span class="cert-badge">MFDS ✓</span>
+            </div>
+        </aside>
+
+        <!-- ── CHAT ─────────────────────────────────────────────── -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-header-dot"></div>
+                <span>DenQy Company Info</span>
+                <span class="chat-header-badge">Online</span>
+            </div>
+            <div class="chat-messages" id="chat-messages"></div>
+            <div class="chat-input-area">
+                <!-- temporarily hidden — re-enable when free-text is ready -->
+                <input type="text" id="user-input" placeholder="Ask me anything..." style="display:none">
+                <button id="send-button" class="pink-btn" style="display:none">
+                    <span class="send-icon">▶</span>
+                </button>
+                <div class="input-guide-msg">
+                    <span class="input-guide-icon">👆</span>
+                    <span>Please use the buttons above to explore DenQ — more features coming soon!</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── RIGHT PANEL ──────────────────────────────────────── -->
+        <aside class="side-panel right-panel">
+
+            <div class="rp-brand">
+                <h3 class="rp-title">DenQ Implant Co., Ltd</h3>
+            
+            </div>
+
+            <div class="rp-info-row">
+                <div class="rp-info-item">
+                    <span class="rp-info-icon">📍</span>
+                    <span>Busandaehak-ro 63beon-gil, Geumjeong-gu, Busan, Republic of Korea</span>
+                </div>
+                <div class="rp-info-item">
+                    <span class="rp-info-icon">🏭</span>
+                    <span>High-Precision Dental Implants</span>
+                </div>
+            </div>
+
+            <div class="rp-catalog-section">
+                <div class="rp-catalog-icon">📋</div>
+                <h4 class="rp-catalog-title">Product Catalog</h4>
+                <p class="rp-catalog-desc">
+                    Download our complete catalog &amp; brochure for full product
+                    specifications and technical data.
+                </p>
+                <div class="rp-catalog-btns">
+                    <a href="../DenQ_Catalog.pdf" target="_blank" class="rp-dl-btn primary">
+                        📥 Download Catalog
+                    </a>
+                    <a href="../DenQ_Brochure.pdf" target="_blank" class="rp-dl-btn secondary">
+                        📄 Download Brochure
+                    </a>
+                </div>
+            </div>
+
+            <div class="rp-contact-section">
+                <p class="rp-contact-title">Customer Service</p>
+                <div class="rp-contact-item">
+                    <span>💬</span>
+                    <a href="https://forms.gle/NDG1ERtjvv9GmX2HA" target="_blank">+82 10 8210-9792</a>
+                </div>
+                <div class="rp-contact-item">
+                    <span>📧</span>
+                    <a href="mailto:biz@denq.kr">biz@denq.kr</a>
+                </div>
+                <div class="rp-contact-item">
+                    <span>🌐</span>
+                    <a href="http://denq.kr" target="_blank">denq.kr</a>
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="image-modal" style="display: none;">
+        <span class="modal-close">&times;</span>
+        <img id="modal-image" src="" alt="Product Image" class="modal-image-content">
+        <div id="modal-caption" class="modal-caption"></div>
+    </div>
+
+    <footer class="precision-footer">
+        <span>Precision Driven</span> &nbsp;|&nbsp;
+        <span>DenQy Support</span> &nbsp;|&nbsp;
+        <span class="location-bold">Busan Metropolitan City</span>
+    </footer>
+
+    <script src="../data/company.js"></script>
+    <script src="../data/implant.js"></script>
+    <script src="../data/endo.js"></script>
+    <script src="../data/packing.js"></script>
+    <script src="../data/faq.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
