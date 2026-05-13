@@ -122,7 +122,7 @@ const PRODUCT_DETAIL = {
             ],
     },
     cement_freemill: {
-        image: 'Freemil.png', sizeImage: 'Freemill_Size.png',
+        image: 'Freemill.png', sizeImage: 'Freemill_Size.png',
         title: 'Freemill Abutment', subtitle: 'CAD/CAM milling cement interface',
         details: 'Cement-retained Freemill Abutment',
         specs: ['Packing Unit: Abutment + Screw', 'Driver: Hex 1.2 Screw Driver', 'Torque: 30 Ncm'],
