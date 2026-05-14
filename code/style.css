@@ -1224,6 +1224,71 @@ body {
     border-top: 1px solid #f5f5f5;
 }
 
+/* ── EXHIBITION CARD ──────────────────────────────────────────── */
+.expo-timeline {
+    padding: 14px 16px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-height: 380px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.expo-year-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.expo-year-badge {
+    background: linear-gradient(135deg, #F0798C 0%, #c94e6e 100%);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.76rem;
+    padding: 4px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 3px;
+    letter-spacing: 0.3px;
+    min-width: 42px;
+    text-align: center;
+}
+
+.expo-events {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+
+.expo-event-chip {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(240, 121, 140, 0.05);
+    border: 1px solid rgba(240, 121, 140, 0.14);
+    border-radius: 10px;
+    padding: 6px 10px;
+}
+
+.expo-flag { font-size: 1rem; flex-shrink: 0; line-height: 1; }
+
+.expo-event-name {
+    font-weight: 600;
+    font-size: 0.81rem;
+    color: var(--text-main);
+    flex: 1;
+}
+
+.expo-location {
+    font-size: 0.71rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
 /* ── FOOTER ───────────────────────────────────────────────────── */
 .precision-footer {
     text-align: center;
