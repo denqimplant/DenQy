@@ -85,7 +85,7 @@ const PRODUCT_DETAIL = {
             'Cutting Edge',
             'Internal Hex 2.5',
             'Torque: 30-40 Ncm',
-            'Packing Unit: Fixture + Cover Screw'
+            'Fixture + Cover Screw'
         ],
     },
 
@@ -101,14 +101,14 @@ const PRODUCT_DETAIL = {
         image: 'Healing Abutment.png', sizeImage: 'Healing_Size.png',
         title: 'Healing Abutment', subtitle: 'Soft tissue shaping abutment',
         details: 'DenQ Healing Abutment.',
-        specs: ['Packing Unit: Abutment','Driver: Hex 1.2 Screw Driver', 'Torque: 10 Ncm'], 
+        specs: ['Abutment','Driver: Hex 1.2 Screw Driver', 'Torque: 10 Ncm'], 
         
     },
     cement_cement: {
         image: 'Cement.png', sizeImage: 'Cement_Size.png',
         title: 'Cement Abutment', subtitle: 'Cement-retained restoration interface',
         details: 'Abutment Connetor',
-        specs: ['Packing Unit: Abutment + Screw', 'Driver: Hex 1.2 Screw Driver', 'Torque: 30 Ncm'],
+        specs: ['Abutment + Screw', 'Driver: Hex 1.2 Screw Driver', 'Torque: 30 Ncm'],
 
     },
     cement_angled: {
@@ -116,7 +116,7 @@ const PRODUCT_DETAIL = {
         title: 'Cement – Angled Abutment', subtitle: 'Angular restorative alignment',
         details: 'Angled Abutment',
         specs: ['Angles: 15° · 25°',
-                'Packing Unit: Abutment + Screw',
+                'Abutment + Screw',
                 'Driver: Hex 1.2 Screw Driver',
                 'Torque: 30 Ncm'
             ],
@@ -125,39 +125,39 @@ const PRODUCT_DETAIL = {
         image: 'Freemill.png', sizeImage: 'Freemill_Size.png',
         title: 'Freemill Abutment', subtitle: 'CAD/CAM milling cement interface',
         details: 'Cement-retained Freemill Abutment',
-        specs: ['Packing Unit: Abutment + Screw', 'Driver: Hex 1.2 Screw Driver', 'Torque: 30 Ncm'],
+        specs: ['Abutment + Screw', 'Driver: Hex 1.2 Screw Driver', 'Torque: 30 Ncm'],
     },
     cement_ccm: {
         image: 'ccm.png', sizeImage: 'CCM_Size.png',
         title: 'CCM Abutment (Cement)', subtitle: 'Cast metal cement abutment',
         details: 'Custom Cast Metal',
-        specs: ['Packing Unit: Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
+        specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     cement_temporary: {
         image: 'temporary.png', sizeImage: 'Temporary_Size.png',
         title: 'Temporary Abutment (Cement)', subtitle: 'Provisional cement-retained interface',
         details: 'Abutment Connector',
-        specs: ['Packing Unit: Abutment + Screw', 'Driver: Hex 1.2 Screw Driver', 'Torque: 20 Ncm'],
+        specs: ['Abutment + Screw', 'Driver: Hex 1.2 Screw Driver', 'Torque: 20 Ncm'],
          
     },
     cement_analog: {
         image: 'FixtureLabAnalog.png', sizeImage: 'FixtureLabAnalog_Size.png',
         title: 'Lab Analog (Cement)', subtitle: 'Lab replica for model fabrication',
         details: 'Fixture Level Lab Analog',
-        specs: ['Packing Unit: Analog'],
+        specs: ['Analog'],
     },
     cement_pickup: {
         image: 'pickup.png', sizeImage: 'pickup_Size.png',
         title: 'Pick-up Impression Coping (Cement)', subtitle: 'Open-tray impression transfer',
         details: 'Open-tray pick-up coping',
-        specs: ['Packing Unit: Impression Coping + Guide pin', 'Driver: Hex 1.2 Screw Driver'],
+        specs: ['Impression Coping + Guide pin', 'Driver: Hex 1.2 Screw Driver'],
 
     },
     cement_transfer: {
         image: 'transfer.png', sizeImage: 'Transfer_Size.png',
         title: 'Transfer Impression Coping (Cement)', subtitle: 'Closed-tray impression transfer',
         details: 'Closed-tray transfer coping',
-        specs: ['Packing Unit: Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
+        specs: ['Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
 
     },
 
@@ -166,63 +166,63 @@ const PRODUCT_DETAIL = {
         image: 'Straight.png', sizeImage: 'Screw_Straight_Size.png',
         title: 'Straight Abutment (Screw)', subtitle: 'Screw-retained straight abutment',
         details: 'Standard Straight Abutment',
-        specs: ['Packing Unit: Abutment + Carrier','Driver: internal hex driver', 'Torque: 30 Ncm'],
+        specs: ['Abutment + Carrier','Driver: internal hex driver', 'Torque: 30 Ncm'],
         
     },
     screw_healing: {
         image: 'healingcap.png', sizeImage: 'Healingcap_Size.png',
         title: 'Healing Abutment (Screw)', subtitle: 'Soft tissue shaping abutment',
         details: 'Multiunit Healing Cap',
-        specs: ['Packing Unit: Healing Cap','Driver: 1.2 Hex Screw Driver' ,'Torque: 20 Ncm'],
+        specs: ['Healing Cap','Driver: 1.2 Hex Screw Driver' ,'Torque: 20 Ncm'],
     },
     screw_angled: {
         image: 'MultiunitAngled.png', sizeImage: 'Angled_Size.png',
         title: 'Angled Abutment (Screw)', subtitle: 'Screw-retained angular alignment',
         details: 'Multiunit Angled Abutment',
-        specs: ['Packing Unit: Abutment + Screw + Ti-Carrier','Torque: 30 Ncm','Angles: 17° · 30°', 'Driver: Hex 1.2 Screw Driver'],
+        specs: ['Abutment + Screw + Ti-Carrier','Torque: 30 Ncm','Angles: 17° · 30°', 'Driver: Hex 1.2 Screw Driver'],
 
     },
     screw_ccm: {
         image: 'multiccm.png', sizeImage: 'MultiCCM_Size.png',
         title: 'CCM Abutment (Screw)', subtitle: 'Cast metal screw abutment',
         details: 'Custom Cast Metal',
-        specs: ['Packing Unit: Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
+        specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     screw_temporary: {
         image: 'multitem.png', sizeImage: 'MultiTem_Size.png',
         title: 'Temporary Abutment (Screw)', subtitle: 'Provisional screw-retained interface',
         details: 'Provisional Abutment During Healing.',
-        specs: ['Packing Unit: Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
+        specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     screw_plastic: {
         image: 'Plastic.png', sizeImage: 'Plastic_Size.png',
         title: 'Plastic Abutment', //subtitle: 'Burn-out pattern for custom castings',
         details: 'DenQ Plastic Abutment',
-        specs: ['Packing Unit: Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
+        specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     screw_ticylinder: {
         image: 'Ticylinder.png', sizeImage: 'TiCylinder_Size.png',
         title: 'Ti Cylinder', subtitle: 'Titanium cylinder for CAD/CAM frameworks',
         details: 'Titanium Cylinder Abutment',
-        specs: ['Packing Unit: Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
+        specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     screw_analog: {
         image: 'MultipleLab Analog.png', sizeImage: 'MultiAnalog_Size.png',
         title: 'Lab Analog (Screw)', //subtitle: 'Lab replica for model fabrication',
         details: 'Abutment Level Lab Analog',
-        specs: ['Packing Unit: Lab Analog' ],
+        specs: ['Lab Analog' ],
     },
     screw_pickup: {
         image: 'multipickup.png', sizeImage: 'MultiPickup_Size.png',
         title: 'Pick-up Impression Coping (Screw)', subtitle: 'Open-tray impression transfer',
         details: 'Open-tray pick-up coping',
-        specs: ['Packing Unit: Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
+        specs: ['Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
     },
     screw_transfer: {
         image: 'multitransfer.png', sizeImage: 'MultiTransfer_Size.png',
         title: 'Transfer Impression Coping (Screw)', subtitle: 'Closed-tray impression transfer',
         details: 'Closed-tray coping',
-        specs: ['Packing Unit: Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
+        specs: ['Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
     },
 
     // DIGITAL LIBRARY
