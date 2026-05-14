@@ -129,33 +129,33 @@ const PRODUCT_DETAIL = {
     },
     cement_ccm: {
         image: 'ccm.png', sizeImage: 'CCM_Size.png',
-        title: 'CCM Abutment (Cement)', subtitle: 'Cast metal cement abutment',
+        title: 'CCM Casting Abutment', subtitle: 'Cast metal cement abutment',
         details: 'Custom Cast Metal',
         specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     cement_temporary: {
         image: 'temporary.png', sizeImage: 'Temporary_Size.png',
-        title: 'Temporary Abutment (Cement)', subtitle: 'Provisional cement-retained interface',
+        title: 'Temporary Abutment', subtitle: 'Provisional cement-retained interface',
         details: 'Abutment Connector',
         specs: ['Abutment + Screw', 'Driver: Hex 1.2 Screw Driver', 'Torque: 20 Ncm'],
          
     },
     cement_analog: {
         image: 'FixtureLabAnalog.png', sizeImage: 'FixtureLabAnalog_Size.png',
-        title: 'Lab Analog (Cement)', subtitle: 'Lab replica for model fabrication',
+        title: 'Fixture Level Lab Analog', subtitle: 'Lab replica for model fabrication',
         details: 'Fixture Level Lab Analog',
         specs: ['Analog'],
     },
     cement_pickup: {
         image: 'pickup.png', sizeImage: 'pickup_Size.png',
-        title: 'Pick-up Impression Coping (Cement)', subtitle: 'Open-tray impression transfer',
+        title: 'Pick-up Impression Coping', subtitle: 'Open-tray impression transfer',
         details: 'Open-tray pick-up coping',
         specs: ['Impression Coping + Guide pin', 'Driver: Hex 1.2 Screw Driver'],
 
     },
     cement_transfer: {
         image: 'transfer.png', sizeImage: 'Transfer_Size.png',
-        title: 'Transfer Impression Coping (Cement)', subtitle: 'Closed-tray impression transfer',
+        title: 'Transfer Impression Coping', subtitle: 'Closed-tray impression transfer',
         details: 'Closed-tray transfer coping',
         specs: ['Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
 
@@ -164,39 +164,39 @@ const PRODUCT_DETAIL = {
     // SCREW RETAINED
     screw_straight: {
         image: 'Straight.png', sizeImage: 'Screw_Straight_Size.png',
-        title: 'Straight Abutment (Screw)', subtitle: 'Screw-retained straight abutment',
+        title: 'Straight Abutment', subtitle: 'Screw-retained straight abutment',
         details: 'Standard Straight Abutment',
         specs: ['Abutment + Carrier','Driver: internal hex driver', 'Torque: 30 Ncm'],
         
     },
     screw_healing: {
         image: 'healingcap.png', sizeImage: 'Healingcap_Size.png',
-        title: 'Healing Abutment (Screw)', subtitle: 'Soft tissue shaping abutment',
+        title: 'Healing Cap', subtitle: 'Soft tissue shaping abutment',
         details: 'Multiunit Healing Cap',
         specs: ['Healing Cap','Driver: 1.2 Hex Screw Driver' ,'Torque: 20 Ncm'],
     },
     screw_angled: {
         image: 'MultiunitAngled.png', sizeImage: 'Angled_Size.png',
-        title: 'Angled Abutment (Screw)', subtitle: 'Screw-retained angular alignment',
+        title: 'Angled Abutment', subtitle: 'Screw-retained angular alignment',
         details: 'Multiunit Angled Abutment',
         specs: ['Abutment + Screw + Ti-Carrier','Torque: 30 Ncm','Angles: 17° · 30°', 'Driver: Hex 1.2 Screw Driver'],
 
     },
     screw_ccm: {
         image: 'multiccm.png', sizeImage: 'MultiCCM_Size.png',
-        title: 'CCM Abutment (Screw)', subtitle: 'Cast metal screw abutment',
+        title: 'CCM Casting Cylinder', subtitle: 'Cast metal screw abutment',
         details: 'Custom Cast Metal',
         specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     screw_temporary: {
         image: 'multitem.png', sizeImage: 'MultiTem_Size.png',
-        title: 'Temporary Abutment (Screw)', subtitle: 'Provisional screw-retained interface',
+        title: 'Temporary Cylinder', subtitle: 'Provisional screw-retained interface',
         details: 'Provisional Abutment During Healing.',
         specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     screw_plastic: {
         image: 'Plastic.png', sizeImage: 'Plastic_Size.png',
-        title: 'Plastic Abutment', //subtitle: 'Burn-out pattern for custom castings',
+        title: 'Plastic Cylindert', //subtitle: 'Burn-out pattern for custom castings',
         details: 'DenQ Plastic Abutment',
         specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
@@ -208,19 +208,19 @@ const PRODUCT_DETAIL = {
     },
     screw_analog: {
         image: 'MultipleLab Analog.png', sizeImage: 'MultiAnalog_Size.png',
-        title: 'Lab Analog (Screw)', //subtitle: 'Lab replica for model fabrication',
+        title: 'Abutment Level Lab Analog ', //subtitle: 'Lab replica for model fabrication',
         details: 'Abutment Level Lab Analog',
         specs: ['Lab Analog' ],
     },
     screw_pickup: {
         image: 'multipickup.png', sizeImage: 'MultiPickup_Size.png',
-        title: 'Pick-up Impression Coping (Screw)', subtitle: 'Open-tray impression transfer',
+        title: 'Pick-up Impression Coping', subtitle: 'Open-tray impression transfer',
         details: 'Open-tray pick-up coping',
         specs: ['Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
     },
     screw_transfer: {
         image: 'multitransfer.png', sizeImage: 'MultiTransfer_Size.png',
-        title: 'Transfer Impression Coping (Screw)', subtitle: 'Closed-tray impression transfer',
+        title: 'Transfer Impression Coping', subtitle: 'Closed-tray impression transfer',
         details: 'Closed-tray coping',
         specs: ['Impression Coping + Guide Pin', 'Driver: Hex 1.2 Screw Driver'],
     },
@@ -248,7 +248,7 @@ const PRODUCT_DETAIL = {
     // OVERDENTURE
     overdenture_ball: {
         image: 'ball.png', sizeImage: 'Ball_Size.png',
-        title: 'Ball Attachment', subtitle: 'Overdenture ball-type retention',
+        title: 'Ball Abutment', subtitle: 'Overdenture ball-type retention',
         details: 'DenQ Overdenture Product',
 
     },
@@ -260,7 +260,7 @@ const PRODUCT_DETAIL = {
 
     // SURGICAL KIT
     surgical: {
-        image: 'DenQTaper.jpeg', sizeImage: 'Surgical_Size.jpeg',
+        image: 'DenQTaper.png', sizeImage: 'Surgical_Size.jpeg',
         title: 'DenQ Surgical KIT', subtitle: 'Complete Implant Placement System',
         details: 'DenQ Taper Surgical KIT',
         specs: [
