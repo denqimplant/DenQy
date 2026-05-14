@@ -631,15 +631,93 @@ function showCompanyOrg() {
     ]);
 }
 
+function buildExhibitionCard() {
+    const EXPO_DATA = [
+        { year: '2019', events: [
+            { name: 'Dentech China',       flag: '🇨🇳', loc: 'China'        },
+        ]},
+        { year: '2020', events: [
+            { name: 'AEEDC Dubai',         flag: '🇦🇪', loc: 'UAE'          },
+        ]},
+        { year: '2022', events: [
+            { name: 'AEEDC Dubai',         flag: '🇦🇪', loc: 'UAE'          },
+            { name: 'IDS',                 flag: '🇩🇪', loc: 'Germany'      },
+            { name: 'Expodent Mumbai',     flag: '🇮🇳', loc: 'India'        },
+            { name: 'Expodent New Delhi',  flag: '🇮🇳', loc: 'India'        },
+        ]},
+        { year: '2023', events: [
+            { name: 'AEEDC',               flag: '🇦🇪', loc: 'UAE'          },
+            { name: 'IDS',                 flag: '🇩🇪', loc: 'Germany'      },
+            { name: 'IDEC',                flag: '🇮🇩', loc: 'Indonesia'    },
+            { name: 'CADEX',               flag: '🇰🇿', loc: 'Kazakhstan'   },
+            { name: 'WDC',                 flag: '🇮🇳', loc: 'India'        },
+        ]},
+        { year: '2024', events: [
+            { name: 'Arab Health',         flag: '🇦🇪', loc: 'UAE'          },
+            { name: 'AEEDC',               flag: '🇦🇪', loc: 'UAE'          },
+            { name: 'IDEX',                flag: '🇹🇷', loc: 'Turkey'       },
+            { name: 'Dentech',             flag: '🇨🇳', loc: 'China'        },
+            { name: 'WCOI',                flag: '🇮🇳', loc: 'India'        },
+        ]},
+        { year: '2025', events: [
+            { name: 'SIDC',                flag: '🇸🇦', loc: 'Saudi Arabia' },
+            { name: 'AEEDC',               flag: '🇦🇪', loc: 'UAE'          },
+            { name: 'IDS',                 flag: '🇩🇪', loc: 'Germany'      },
+            { name: 'VIDEC',               flag: '🇻🇳', loc: 'Vietnam'      },
+            { name: 'CADEX',               flag: '🇰🇿', loc: 'Kazakhstan'   },
+            { name: 'BIBAN',               flag: '🇸🇦', loc: 'Saudi Arabia' },
+        ]},
+        { year: '2026', events: [
+            { name: 'AEEDC',               flag: '🇦🇪', loc: 'UAE'          },
+        ]},
+    ];
+
+    const total     = EXPO_DATA.reduce((sum, y) => sum + y.events.length, 0);
+    const countries = [...new Set(EXPO_DATA.flatMap(y => y.events.map(e => e.loc)))].length;
+
+    const timelineHtml = EXPO_DATA.map(y => `
+        <div class="expo-year-block">
+            <div class="expo-year-badge">${y.year}</div>
+            <div class="expo-events">
+                ${y.events.map(e => `
+                    <div class="expo-event-chip">
+                        <span class="expo-flag">${e.flag}</span>
+                        <span class="expo-event-name">${e.name}</span>
+                        <span class="expo-location">${e.loc}</span>
+                    </div>`).join('')}
+            </div>
+        </div>`).join('');
+
+    return `
+        <div class="bot-history-card" style="padding:0; overflow:hidden;">
+            <div style="background:linear-gradient(135deg,#F0798C 0%,#c94e6e 100%); padding:14px 18px;">
+                <div style="color:#fff; font-weight:700; font-size:0.95rem;">🌍 Global Exhibition Presence</div>
+                <div style="color:rgba(255,255,255,0.82); font-size:0.74rem; margin-top:3px;">${total} exhibitions · ${countries} countries · 2019–2026</div>
+            </div>
+            <div class="expo-timeline">${timelineHtml}</div>
+        </div>`;
+}
+
+function showCompanyExhibition() {
+    chatState.section = 'company_exhibition';
+    appendMessage('🌍 DenQ Global Exhibition History:', 'bot', false);
+    appendMessage(buildExhibitionCard(), 'bot', true);
+    showButtons([
+        { label: '◀ Back',       onClick: showCompanyProfile },
+        { label: '🏠 Main Menu', onClick: showMainMenu       },
+    ]);
+}
+
 function showCompanyProfile() {
     chatState.level   = 1;
     chatState.section = 'company';
     appendMessage('Select a topic about DenQ:', 'bot', false);
     showButtons([
-        { label: '📅 History',      onClick: showCompanyHistory },
-        { label: '🔬 R&D',          onClick: showCompanyRD      },
-        { label: '🏢 Organization', onClick: showCompanyOrg     },
-        { label: '🏠 Main Menu',    onClick: showMainMenu       },
+        { label: '📅 History',      onClick: showCompanyHistory    },
+        { label: '🔬 R&D',          onClick: showCompanyRD         },
+        { label: '🏢 Organization', onClick: showCompanyOrg        },
+        { label: '🌍 Exhibition',   onClick: showCompanyExhibition },
+        { label: '🏠 Main Menu',    onClick: showMainMenu          },
     ]);
 }
 
@@ -880,10 +958,11 @@ function handleFreeText(text) {
     if (/\b(implant|abutment|implants)\b/.test(t))                               { showImplantMenu();    return; }
     if (/\b(endo|endodontic|root canal)\b/.test(t))                              { showEndoMenu();       return; }
     if (/\b(catalog|catalogue|brochure|download|pdf)\b/.test(t))                 { showCatalogInfo();    return; }
-    if (/\b(timeline|founding)\b/.test(t))                                               { showCompanyHistory(); return; }
-    if (/\b(r&d|research|development|patent|innovation|plasma)\b/i.test(t))              { showCompanyRD();      return; }
-    if (/\b(organization|organisation|ceo|founder|bio|team)\b/.test(t))                  { showCompanyOrg();     return; }
-    if (/\b(history|company|about|introduction|intro|founded)\b/.test(t))                { showCompanyProfile(); return; }
+    if (/\b(timeline|founding)\b/.test(t))                                                      { showCompanyHistory();    return; }
+    if (/\b(r&d|research|development|patent|innovation|plasma)\b/i.test(t))                   { showCompanyRD();         return; }
+    if (/\b(organization|organisation|ceo|founder|bio|team)\b/.test(t))                        { showCompanyOrg();        return; }
+    if (/\b(exhibition|expo|fair|trade show|aeedc|ids|dentech|expodent|idec|cadex)\b/i.test(t)){ showCompanyExhibition(); return; }
+    if (/\b(history|company|about|introduction|intro|founded)\b/.test(t))                      { showCompanyProfile();    return; }
     if (/\b(faq|faqs|question|questions|ask)\b/.test(t))                                 { showOtherMenu();      return; }
     if (/\bce\b.*\b(mark|marks|marking|certificate|cert|certified)\b|\b(ce mark|ce marks|ce certificate)\b/.test(t)) {
         appendMessage("DenQ's CE Mark certification is currently in progress — we're actively working on it and expect to have it available soon. In the meantime, DenQ holds FDA, ISO 13485, and MFDS certifications. Feel free to contact us if you need more details!", 'bot', false);
