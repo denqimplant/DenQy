@@ -58,6 +58,14 @@ function getCurrentTimestamp() {
     return new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 }
 
+// On mobile/tablet: scroll the page so the chat container is visible at the top
+function scrollPageToChat() {
+    if (window.innerWidth <= 820) {
+        document.querySelector('.chat-container')
+            ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
 function appendMessage(text, senderType, isHTML = false) {
     const wrapper = document.createElement('div');
     wrapper.classList.add('message-wrapper', senderType === 'bot' ? 'wrapper-bot' : 'wrapper-user');
@@ -75,6 +83,9 @@ function appendMessage(text, senderType, isHTML = false) {
     wrapper.appendChild(time);
     chatMessages.appendChild(wrapper);
     chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // On mobile: bring chat into view whenever bot replies
+    if (senderType === 'bot') scrollPageToChat();
 }
 
 function showButtons(buttons) {
@@ -90,6 +101,7 @@ function showButtons(buttons) {
         el.textContent = btn.label;
         el.addEventListener('click', () => {
             appendMessage(btn.label, 'user', false);
+            scrollPageToChat();           // snap back to chat immediately on tap
             showTypingIndicator();
             setTimeout(() => { removeTypingIndicator(); btn.onClick(); }, 3000);
         });
