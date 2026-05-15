@@ -91,7 +91,7 @@ const PRODUCT_DETAIL = {
 
     // CEMENT RETAINED
     cement_screw: {
-        image: 'Screw.png', sizeImage: 'Cement_Screw_Size.png',
+        image: 'screw.png', sizeImage: 'Cement_Screw_Size.png',
         title: 'Cover Screw', subtitle: 'Cement-retained screw interface',
         details: 'Fixture Cover Screw',
         specs: ['Driver: Hex 1.2 Screw Driver', 'Torque: 5-8 Ncm'],
@@ -162,7 +162,7 @@ const PRODUCT_DETAIL = {
 
     // SCREW RETAINED
     screw_straight: {
-        image: 'Straight.png', sizeImage: 'Screw_Straight_Size.png',
+        image: 'straight.png', sizeImage: 'Screw_Straight_Size.png',
         title: 'Straight Abutment', subtitle: 'Screw-retained straight abutment',
         details: 'Standard Straight Abutment',
         specs: ['Abutment + Carrier','Driver: internal hex driver', 'Torque: 30 Ncm'],
