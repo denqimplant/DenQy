@@ -77,15 +77,15 @@ const PRODUCT_DETAIL = {
         subtitle:  'Premium Dental Implant Solution',
         details:   'Typically Emphasized Features',
         specs: [
-            'Economical Design',
-            'SLA Surface Treatment',
-            'Titanium Grade 4',
-            'Platform Switching',
-            'Double Thread',
             'Cutting Edge',
+            'Double Thread',
+            'Titanium Grade 4',
             'Internal Hex 2.5',
+            'Economical Design',
+            'Platform Switching',
             'Torque: 30-40 Ncm',
-            'Fixture + Cover Screw'
+            'SLA Surface Treatment',
+            'Fixture + Cover Screw',
         ],
     },
 
@@ -101,7 +101,7 @@ const PRODUCT_DETAIL = {
         image: 'Healing Abutment.png', sizeImage: 'Healing_Size.png',
         title: 'Healing Abutment', subtitle: 'Soft tissue shaping abutment',
         details: 'DenQ Healing Abutment.',
-        specs: ['Abutment','Driver: Hex 1.2 Screw Driver', 'Torque: 10 Ncm'], 
+        specs: ['Driver: Hex 1.2 Screw Driver', 'Torque: 10 Ncm'], 
         
     },
     cement_cement: {
@@ -113,7 +113,7 @@ const PRODUCT_DETAIL = {
     },
     cement_angled: {
         image: 'Angle15.png', sizeImage: 'Angled_Size.png',
-        title: 'Cement – Angled Abutment', subtitle: 'Angular restorative alignment',
+        title: 'Angled Abutment', subtitle: 'Angular restorative alignment',
         details: 'Angled Abutment',
         specs: ['Angles: 15° · 25°',
                 'Abutment + Screw',
@@ -135,7 +135,7 @@ const PRODUCT_DETAIL = {
     },
     cement_temporary: {
         image: 'temporary.png', sizeImage: 'Temporary_Size.png',
-        title: 'Temporary Abutment', subtitle: 'Provisional cement-retained interface',
+        title: 'Temporary Abutment ', subtitle: 'Provisional cement-retained interface',
         details: 'Abutment Connector',
         specs: ['Abutment + Screw', 'Driver: Hex 1.2 Screw Driver', 'Torque: 20 Ncm'],
          
@@ -144,7 +144,6 @@ const PRODUCT_DETAIL = {
         image: 'FixtureLabAnalog.png', sizeImage: 'FixtureLabAnalog_Size.png',
         title: 'Fixture Level Lab Analog', subtitle: 'Lab replica for model fabrication',
         details: 'Fixture Level Lab Analog',
-        specs: ['Analog'],
     },
     cement_pickup: {
         image: 'pickup.png', sizeImage: 'pickup_Size.png',
@@ -195,22 +194,21 @@ const PRODUCT_DETAIL = {
         specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     screw_plastic: {
-        image: 'Plastic.png', sizeImage: 'Plastic_Size.png',
-        title: 'Plastic Cylindert', //subtitle: 'Burn-out pattern for custom castings',
+        image: 'plastic.png', sizeImage: 'Plastic_Size.png',
+        title: 'Plastic Cylinder', //subtitle: 'Burn-out pattern for custom castings',
         details: 'DenQ Plastic Abutment',
         specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     screw_ticylinder: {
         image: 'Ticylinder.png', sizeImage: 'TiCylinder_Size.png',
         title: 'Ti Cylinder', subtitle: 'Titanium cylinder for CAD/CAM frameworks',
-        details: 'Titanium Cylinder Abutment',
+        details: 'Titanium Cylinder',
         specs: ['Cylinder + Screw', 'Driver: 1.2 Hex Screw Driver', 'Torque: 20 Ncm'],
     },
     screw_analog: {
         image: 'MultipleLab Analog.png', sizeImage: 'MultiAnalog_Size.png',
         title: 'Abutment Level Lab Analog ', //subtitle: 'Lab replica for model fabrication',
         details: 'Abutment Level Lab Analog',
-        specs: ['Lab Analog' ],
     },
     screw_pickup: {
         image: 'multipickup.png', sizeImage: 'MultiPickup_Size.png',
@@ -261,7 +259,7 @@ const PRODUCT_DETAIL = {
     // SURGICAL KIT
     surgical: {
         image: 'DenQTaper.png', sizeImage: 'Surgical_Size.jpeg',
-        title: 'DenQ Surgical KIT', subtitle: 'Complete Implant Placement System',
+        title: 'DenQ Taper Surgical KIT', subtitle: 'Complete Implant Placement System',
         details: 'DenQ Taper Surgical KIT',
         specs: [
             'Simple KIT: 13 drills',
