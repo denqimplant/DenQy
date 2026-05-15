@@ -11,21 +11,27 @@ const ENDO_DETAIL = {
     remover: {
         image:    'Remover.png',    // ← update to your actual image filename
         title:    'Endo Remover',
-        subtitle: 'Endodontic Removal System',
-        details:  'Professional Endodontic Remover for Efficient Root Canal Treatment.',
+        subtitle: 'G.P Cutter Patent NO.0317420',
+        details:  'Endo-Remover Includes:',
         specs: [
-            // Add your product specs here, e.g.:
-            // 'Size: #15 – #40',
-            // 'Material: NiTi',
+            'Remover 1EA',
+            'Charger 1EA',
+            'Battery Cell 2EA',
+            'Cutting Tips 4EA',
+            'IFU and Warranty Information',
         ],
     },
     condenser: {
         image:    'Condenser.png',  // ← update to your actual image filename
         title:    'Endo Condenser',
-        subtitle: 'Endodontic Condensation System',
-        details:  'High-precision Condenser for Optimal Root Canal Obturation.',
+        subtitle: 'Utility Design Application',
+        details:  'Endo-Condenser Includes:',
         specs: [
-            // Add your product specs here
+            'Condenser 1EA',
+            'Charger 1EA',
+            'Battery Cell 2EA',
+            'Tip 2EA: Fine, Fine Medium',
+            'IFU and Warranty Information',
         ],
     },
 };
