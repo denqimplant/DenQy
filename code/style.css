@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
+
 :root {
     --denq-pink: #F0798C;
     --denq-dark: #c94e6e;
@@ -222,12 +224,21 @@ body {
 
 .chat-header-badge {
     margin-left: auto;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.45);
+    background: #22c55e;
+    border: 1px solid #16a34a;
     border-radius: 999px;
-    padding: 2px 11px;
+    padding: 3px 12px;
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    color: #ffffff;
+}
+
+.chat-header-title,
+.chat-header span:not(.chat-header-badge) {
+    font-family: 'Nunito', 'Poppins', sans-serif;
+    font-weight: 800;
+    font-size: 1.02rem;
     letter-spacing: 0.4px;
 }
 
@@ -1541,11 +1552,12 @@ body {
     .chat-header     { flex-shrink: 0; border-radius: 16px 16px 0 0; }
     .chat-input-area { flex-shrink: 0; border-radius: 0 0 16px 16px; padding: 12px 14px; }
 
-    /* Messages: generous height, always scrollable — no flex tricks */
+    /* Messages: grow to fit content — no more cutting off cards/buttons */
     .chat-messages {
-        height: clamp(420px, 62vh, 600px);
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
+        height: auto;
+        min-height: 300px;
+        flex-grow: 0;
+        overflow-y: visible;
         padding: 16px;
     }
 
@@ -1575,7 +1587,7 @@ body {
     .chat-container  { border-radius: 14px; }
     .chat-header     { border-radius: 14px 14px 0 0; }
     .chat-input-area { border-radius: 0 0 14px 14px; padding: 10px 12px; }
-    .chat-messages   { height: clamp(390px, 60vh, 540px); padding: 12px; }
+    .chat-messages   { height: auto; min-height: 260px; overflow-y: visible; padding: 12px; }
 
     #user-input { font-size: 16px; }
     .pink-btn   { font-size: 16px; padding: 10px 14px; }
@@ -1587,7 +1599,7 @@ body {
 
 /* ── VERY SMALL PHONES  (≤380px) ─────────────────────────────── */
 @media (max-width: 380px) {
-    .chat-messages      { height: clamp(340px, 55vh, 460px); }
+    .chat-messages      { height: auto; min-height: 220px; overflow-y: visible; }
     .btn-chip           { font-size: 0.72rem; padding: 9px 8px; }
     .btn-chip-container { gap: 6px; }
 }
