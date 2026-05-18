@@ -3,8 +3,8 @@
 // ═══════════════════════════════════════════════════════════════════
 
 const ENDO_SUBMENU = [
-    { label: '🔧 Endo Remover',   key: 'remover'   },
-    { label: '🔬 Endo Condenser', key: 'condenser' },
+    { label: '🔧 Remover',   key: 'remover'   },
+    { label: '🔬 Condenser', key: 'condenser' },
 ];
 
 const ENDO_DETAIL = {
