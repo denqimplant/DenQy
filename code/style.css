@@ -302,10 +302,10 @@ body {
 /* ── EQUAL-SIZE CHIP BUTTONS (grid layout) ───────────────────── */
 .btn-chip-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     margin-top: 8px;
-    max-width: 360px;
+    max-width: 460px;
     width: 100%;
 }
 
@@ -1572,9 +1572,9 @@ body {
     .faq-card           { max-width: 100%; }
     .bot-history-card   { max-width: 100%; }
 
-    /* Buttons: always 2 equal columns */
+    /* Buttons: 3 equal columns on tablet/mobile */
     .btn-chip-container {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         max-width: 100%;
     }
 }
@@ -1600,5 +1600,5 @@ body {
 @media (max-width: 380px) {
     .chat-messages      { height: clamp(400px, 64vh, 540px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .btn-chip           { font-size: 0.72rem; padding: 9px 8px; }
-    .btn-chip-container { gap: 6px; }
+    .btn-chip-container { grid-template-columns: repeat(2, 1fr); gap: 6px; }
 }
