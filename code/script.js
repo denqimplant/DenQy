@@ -396,8 +396,8 @@ function showFixtureDetail() {
     appendMessage(`Here is the ${info.title}.`, 'bot', false);
     appendMessage(buildProductCard('fixture'), 'bot', true);
     showButtons([
-        { label: '🔩 Cover Screw',      onClick: () => showRelatedProduct('cement_screw',   showFixtureDetail) },
-        { label: '🦷 Healing Abutment', onClick: () => showRelatedProduct('cement_healing', showFixtureDetail) },
+        { label: '🔩 Screw',   onClick: () => showRelatedProduct('cement_screw',   showFixtureDetail) },
+        { label: '🦷 Healing', onClick: () => showRelatedProduct('cement_healing', showFixtureDetail) },
         { label: '◀ Back',              onClick: showImplantMenu  },
         { label: '📋 Catalog',          onClick: showCatalogInfo  },
         { label: '🏠 Main Menu',        onClick: showMainMenu     },
@@ -426,7 +426,7 @@ function showCementSubMenu() {
         onClick: () => showImplantItemDetail(item.key, showCementSubMenu),
     }));
     btns.push(
-        { label: '◀ Back to Implant', onClick: showImplantMenu },
+        { label: '◀ Back', onClick: showImplantMenu },
         { label: '🏠 Main Menu',       onClick: showMainMenu    },
     );
     showButtons(btns);
@@ -440,7 +440,7 @@ function showScrewSubMenu() {
         onClick: () => showImplantItemDetail(item.key, showScrewSubMenu),
     }));
     btns.push(
-        { label: '◀ Back to Implant', onClick: showImplantMenu },
+        { label: '◀ Back', onClick: showImplantMenu },
         { label: '🏠 Main Menu',       onClick: showMainMenu    },
     );
     showButtons(btns);
@@ -455,7 +455,7 @@ function showOverdentureSubMenu() {
         onClick: () => showImplantItemDetail(item.key, showOverdentureSubMenu),
     }));
     btns.push(
-        { label: '◀ Back to Implant', onClick: showImplantMenu },
+        { label: '◀ Back', onClick: showImplantMenu },
         { label: '🏠 Main Menu',       onClick: showMainMenu    },
     );
     showButtons(btns);
@@ -588,7 +588,7 @@ function buildCompanyHistoryCard() {
 
 function showCompanyHistory() {
     chatState.section = 'company_history';
-    appendMessage('📅 DenQ Company History:', 'bot', false);
+    appendMessage(' DenQ Company History:', 'bot', false);
     appendMessage(buildCompanyHistoryCard(), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showCompanyProfile },
@@ -606,7 +606,7 @@ function buildCompanyRDCard() {
     ].map(a => `<li>${a}</li>`).join('');
     return `
         <div class="bot-history-card">
-            <h4 class="section-heading">🔬 R&D Achievements</h4>
+            <h4 class="section-heading"> R&D Achievements</h4>
             <ul class="bot-history-highlights">${rdItems}</ul>
         </div>`;
 }
@@ -625,7 +625,7 @@ function buildCompanyOrgCard() {
     return `
         <div class="bot-history-card" style="padding:0; overflow:hidden;">
             <div style="padding:14px 16px 10px; border-bottom:1px solid rgba(240,121,140,0.1);">
-                <div class="bot-product-title">🏢 DenQ Organization Chart</div>
+                <div class="bot-product-title"> DenQ Organization Chart</div>
             </div>
             <img src="${IMG}Organization.png" alt="DenQ Organization Chart"
                  class="org-chart-image"
@@ -635,7 +635,7 @@ function buildCompanyOrgCard() {
 
 function showCompanyOrg() {
     chatState.section = 'company_org';
-    appendMessage('🏢 DenQ Organization:', 'bot', false);
+    appendMessage('DenQ Organization:', 'bot', false);
     appendMessage(buildCompanyOrgCard(), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showCompanyProfile },
@@ -712,7 +712,7 @@ function buildExhibitionCard() {
 
 function showCompanyExhibition() {
     chatState.section = 'company_exhibition';
-    appendMessage('🌍 DenQ Global Exhibition History:', 'bot', false);
+    appendMessage('DenQ Global Exhibition History:', 'bot', false);
     appendMessage(buildExhibitionCard(), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showCompanyProfile },
@@ -725,11 +725,11 @@ function showCompanyProfile() {
     chatState.section = 'company';
     appendMessage('Select a topic about DenQ:', 'bot', false);
     showButtons([
-        { label: '📅 History',      onClick: showCompanyHistory    },
-        { label: '🔬 R&D',          onClick: showCompanyRD         },
-        { label: '🏢 Organization', onClick: showCompanyOrg        },
-        { label: '🌍 Exhibition',   onClick: showCompanyExhibition },
-        { label: '🏠 Main Menu',    onClick: showMainMenu          },
+        { label: ' History',      onClick: showCompanyHistory    },
+        { label: ' R&D',          onClick: showCompanyRD         },
+        { label: ' Organization', onClick: showCompanyOrg        },
+        { label: ' Exhibition',   onClick: showCompanyExhibition },
+        { label: ' Main Menu',    onClick: showMainMenu          },
     ]);
 }
 
