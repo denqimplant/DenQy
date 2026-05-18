@@ -216,7 +216,7 @@ body {
 .chat-header-dot {
     width: 9px;
     height: 9px;
-    background: #ffffff;
+    background: #22c55e;
     border-radius: 50%;
     flex-shrink: 0;
     animation: headerPulse 2s ease-in-out infinite;
@@ -1552,12 +1552,11 @@ body {
     .chat-header     { flex-shrink: 0; border-radius: 16px 16px 0 0; }
     .chat-input-area { flex-shrink: 0; border-radius: 0 0 16px 16px; padding: 12px 14px; }
 
-    /* Messages: grow to fit content — no more cutting off cards/buttons */
+    /* Messages: tall fixed scroll box — fits most product cards comfortably */
     .chat-messages {
-        height: auto;
-        min-height: 300px;
-        flex-grow: 0;
-        overflow-y: visible;
+        height: clamp(500px, 72vh, 680px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
         padding: 16px;
     }
 
@@ -1587,7 +1586,7 @@ body {
     .chat-container  { border-radius: 14px; }
     .chat-header     { border-radius: 14px 14px 0 0; }
     .chat-input-area { border-radius: 0 0 14px 14px; padding: 10px 12px; }
-    .chat-messages   { height: auto; min-height: 260px; overflow-y: visible; padding: 12px; }
+    .chat-messages   { height: clamp(460px, 68vh, 600px); overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 12px; }
 
     #user-input { font-size: 16px; }
     .pink-btn   { font-size: 16px; padding: 10px 14px; }
@@ -1599,7 +1598,7 @@ body {
 
 /* ── VERY SMALL PHONES  (≤380px) ─────────────────────────────── */
 @media (max-width: 380px) {
-    .chat-messages      { height: auto; min-height: 220px; overflow-y: visible; }
+    .chat-messages      { height: clamp(400px, 64vh, 540px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .btn-chip           { font-size: 0.72rem; padding: 9px 8px; }
     .btn-chip-container { gap: 6px; }
 }
