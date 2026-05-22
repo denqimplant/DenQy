@@ -3,11 +3,11 @@
 // ═══════════════════════════════════════════════════════════════════
 
 const IMPLANT_SUBMENU = [
-    { label: '🔩 DenQ Fixture',     key: 'fixture'    },
-    { label: '🦷 Cement Retained',  key: 'cement'     },
-    { label: '🔧 Screw Retained',   key: 'screw'      },
-    { label: '🦷 Overdenture',      key: 'overdenture'},
-    { label: '🧰 Surgical KIT',     key: 'surgical'   },
+    { label: 'DenQ Fixture',     key: 'fixture'    },
+    { label: 'Cement Retained',  key: 'cement'     },
+    { label: 'Screw Retained',   key: 'screw'      },
+    { label: 'Overdenture',      key: 'overdenture'},
+    { label: 'Surgical KIT',     key: 'surgical'   },
 ];
 
 const CEMENT_ITEMS = [
@@ -35,14 +35,14 @@ const SCREW_ITEMS = [
 ];
 
 const DIGITAL_ITEMS = [
-    { label: '📡 Scan Body',   key: 'digital_scanbody'  },
-    { label: '🔬 Lab Analog',  key: 'digital_labanalog' },
-    { label: '🔧 Ti-BASE',     key: 'digital_tibase'    },
+    { label: 'Scan Body',   key: 'digital_scanbody'  },
+    { label: 'Lab Analog',  key: 'digital_labanalog' },
+    { label: 'Ti-BASE',     key: 'digital_tibase'    },
 ];
 
 const OVERDENTURE_ITEMS = [
-    { label: '⚙️ Ball',    key: 'overdenture_ball'    },
-    { label: '🔒 Locator', key: 'overdenture_locator' },
+    { label: 'Ball',    key: 'overdenture_ball'    },
+    { label: 'Locator', key: 'overdenture_locator' },
 ];
 
 // ── Product detail data ────────────────────────────────────────────
