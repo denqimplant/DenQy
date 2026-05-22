@@ -41,13 +41,13 @@ const chatState = {
 
 // ── Main menu definition ───────────────────────────────────────────
 const MAIN_MENU = [
-    { label: '🦷 Products',      onClick: showImplantMenu    },
-    { label: '🔬 Endo',         onClick: showEndoMenu        },
-    { label: '🏢 Company',      onClick: showCompanyProfile  },
-    { label: '🏅 Certificates', onClick: showCertificateInfo },
-    { label: '📋 Catalog',      onClick: showCatalogInfo     },
-    { label: '💡 FAQs',         onClick: showOtherMenu       },
-    { label: '📞 Contact Us',   onClick: showContactInfo     },
+    { label: 'Products',     onClick: showImplantMenu    },
+    { label: 'Endo',         onClick: showEndoMenu        },
+    { label: 'Company',      onClick: showCompanyProfile  },
+    { label: 'Certificates', onClick: showCertificateInfo },
+    { label: 'Catalog',      onClick: showCatalogInfo     },
+    { label: 'FAQs',         onClick: showOtherMenu       },
+    { label: 'Contact Us',   onClick: showContactInfo     },
 ];
 
 // ═══════════════════════════════════════════════════════════════════
@@ -278,7 +278,7 @@ function buildContactCard() {
             </div>
             <div class="bot-product-body">
                 <a href="https://forms.gle/NDG1ERtjvv9GmX2HA" target="_blank" class="contact-form-btn">📝 Send an Inquiry</a>
-                <div class="contact-row"><span class="contact-icon">💬</span><span class="contact-label">WhatsApp</span><span class="contact-value"><a href="https://wa.me/821082109792" target="_blank">+82 10 8210-9792</a></span></div>
+                <div class="contact-row"><span class="contact-icon">💬</span><span class="contact-label">WhatsApp</span><span class="contact-value"><a href="https://wa.me/821082109792" target="_blank">+82 10 8210 9792</a></span></div>
                 <div class="contact-row"><span class="contact-icon">📧</span><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:biz@denq.kr">biz@denq.kr</a></span></div>
                 <div class="contact-row"><span class="contact-icon">🌐</span><span class="contact-label">Website</span><span class="contact-value"><a href="https://denq.kr" target="_blank">denq.kr</a></span></div>
             </div>
@@ -370,8 +370,8 @@ function showImplantMenu() {
         onClick: () => handleImplantProduct(item.key),
     }));
     btns.push(
-        { label: '📞 Contact',   onClick: showContactInfo },
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
+        { label: 'Contact',   onClick: showContactInfo },
+        { label: 'Main Menu', onClick: showMainMenu    },
     );
     showButtons(btns);
 }
@@ -396,11 +396,11 @@ function showFixtureDetail() {
     appendMessage(`Here is the ${info.title}.`, 'bot', false);
     appendMessage(buildProductCard('fixture'), 'bot', true);
     showButtons([
-        { label: '🔩 Screw',   onClick: () => showRelatedProduct('cement_screw',   showFixtureDetail) },
-        { label: '🦷 Healing', onClick: () => showRelatedProduct('cement_healing', showFixtureDetail) },
+        { label: 'Screw',   onClick: () => showRelatedProduct('cement_screw',   showFixtureDetail) },
+        { label: 'Healing', onClick: () => showRelatedProduct('cement_healing', showFixtureDetail) },
         { label: '◀ Back',              onClick: showImplantMenu  },
-        { label: '📋 Catalog',          onClick: showCatalogInfo  },
-        { label: '🏠 Main Menu',        onClick: showMainMenu     },
+        { label: 'Catalog',          onClick: showCatalogInfo  },
+        { label: 'Main Menu',        onClick: showMainMenu     },
     ]);
 }
 
@@ -411,8 +411,8 @@ function showRelatedProduct(key, backFn) {
     appendMessage(buildProductCard(key), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: backFn          },
-        { label: '📋 Catalog',   onClick: showCatalogInfo },
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
+        { label: 'Catalog',   onClick: showCatalogInfo },
+        { label: 'Main Menu', onClick: showMainMenu    },
     ]);
 }
 
@@ -427,7 +427,7 @@ function showCementSubMenu() {
     }));
     btns.push(
         { label: '◀ Back', onClick: showImplantMenu },
-        { label: '🏠 Main Menu',       onClick: showMainMenu    },
+        { label: 'Main Menu',       onClick: showMainMenu    },
     );
     showButtons(btns);
 }
@@ -441,7 +441,7 @@ function showScrewSubMenu() {
     }));
     btns.push(
         { label: '◀ Back', onClick: showImplantMenu },
-        { label: '🏠 Main Menu',       onClick: showMainMenu    },
+        { label: 'Main Menu',       onClick: showMainMenu    },
     );
     showButtons(btns);
 }
@@ -456,7 +456,7 @@ function showOverdentureSubMenu() {
     }));
     btns.push(
         { label: '◀ Back', onClick: showImplantMenu },
-        { label: '🏠 Main Menu',       onClick: showMainMenu    },
+        { label: 'Main Menu',       onClick: showMainMenu    },
     );
     showButtons(btns);
 }
@@ -470,8 +470,8 @@ function showSurgicalDetail() {
     appendMessage(buildProductCard('surgical'), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showImplantMenu  },
-        { label: '📋 Catalog',   onClick: showCatalogInfo  },
-        { label: '🏠 Main Menu', onClick: showMainMenu     },
+        { label: 'Catalog',   onClick: showCatalogInfo  },
+        { label: 'Main Menu', onClick: showMainMenu     },
     ]);
 }
 
@@ -484,8 +484,8 @@ function showImplantItemDetail(key, backFn) {
     appendMessage(buildProductCard(key), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: backFn          },
-        { label: '📋 Catalog',   onClick: showCatalogInfo },
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
+        { label: 'Catalog',   onClick: showCatalogInfo },
+        { label: 'Main Menu', onClick: showMainMenu    },
     ]);
 }
 
@@ -526,8 +526,8 @@ function showEndoMenu() {
         onClick: () => showEndoItemDetail(item.key),
     }));
     btns.push(
-        { label: '📞 Contact',   onClick: showContactInfo },
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
+        { label: 'Contact',   onClick: showContactInfo },
+        { label: 'Main Menu', onClick: showMainMenu    },
     );
     showButtons(btns);
 }
@@ -537,8 +537,8 @@ function showEndoItemDetail(key) {
     appendMessage(buildEndoCard(key), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showEndoMenu    },
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
-        { label: '📞 Contact',   onClick: showContactInfo },
+        { label: 'Main Menu', onClick: showMainMenu    },
+        { label: 'Contact',   onClick: showContactInfo },
     ]);
 }
 
@@ -551,8 +551,8 @@ function showCatalogInfo() {
     chatState.section = 'catalog';
     appendMessage(buildCatalogCard(), 'bot', true);
     showButtons([
-        { label: '🦷 Implant',   onClick: showImplantMenu },
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
+        { label: 'Implant',   onClick: showImplantMenu },
+        { label: 'Main Menu', onClick: showMainMenu    },
     ]);
 }
 
@@ -592,7 +592,7 @@ function showCompanyHistory() {
     appendMessage(buildCompanyHistoryCard(), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showCompanyProfile },
-        { label: '🏠 Main Menu', onClick: showMainMenu       },
+        { label: 'Main Menu', onClick: showMainMenu       },
     ]);
 }
 
@@ -617,7 +617,7 @@ function showCompanyRD() {
     appendMessage(buildCompanyRDCard(), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showCompanyProfile },
-        { label: '🏠 Main Menu', onClick: showMainMenu       },
+        { label: 'Main Menu', onClick: showMainMenu       },
     ]);
 }
 
@@ -639,53 +639,53 @@ function showCompanyOrg() {
     appendMessage(buildCompanyOrgCard(), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showCompanyProfile },
-        { label: '🏠 Main Menu', onClick: showMainMenu       },
+        { label: 'Main Menu', onClick: showMainMenu       },
     ]);
 }
 
 function buildExhibitionCard() {
     const EXPO_DATA = [
         { year: '2019', events: [
-            { name: 'Dentech China',       flag: '🇨🇳', loc: 'China'        },
+            { name: 'Dentech China',       code: 'cn' },
         ]},
         { year: '2020', events: [
-            { name: 'AEEDC Dubai',         flag: '🇦🇪', loc: 'UAE'          },
+            { name: 'AEEDC Dubai',         code: 'ae' },
         ]},
         { year: '2022', events: [
-            { name: 'AEEDC Dubai',         flag: '🇦🇪', loc: 'UAE'          },
-            { name: 'IDS',                 flag: '🇩🇪', loc: 'Germany'      },
-            { name: 'Expodent Mumbai',     flag: '🇮🇳', loc: 'India'        },
-            { name: 'Expodent New Delhi',  flag: '🇮🇳', loc: 'India'        },
+            { name: 'AEEDC Dubai',         code: 'ae' },
+            { name: 'IDS',                 code: 'de' },
+            { name: 'Expodent Mumbai',     code: 'in' },
+            { name: 'Expodent New Delhi',  code: 'in' },
         ]},
         { year: '2023', events: [
-            { name: 'AEEDC',               flag: '🇦🇪', loc: 'UAE'          },
-            { name: 'IDS',                 flag: '🇩🇪', loc: 'Germany'      },
-            { name: 'IDEC',                flag: '🇮🇩', loc: 'Indonesia'    },
-            { name: 'CADEX',               flag: '🇰🇿', loc: 'Kazakhstan'   },
-            { name: 'WDC',                 flag: '🇮🇳', loc: 'India'        },
+            { name: 'AEEDC',               code: 'ae' },
+            { name: 'IDS',                 code: 'de' },
+            { name: 'IDEC',                code: 'id' },
+            { name: 'CADEX',               code: 'kz' },
+            { name: 'WDC',                 code: 'in' },
         ]},
         { year: '2024', events: [
-            { name: 'Arab Health',         flag: '🇦🇪', loc: 'UAE'          },
-            { name: 'AEEDC',               flag: '🇦🇪', loc: 'UAE'          },
-            { name: 'IDEX',                flag: '🇹🇷', loc: 'Turkey'       },
-            { name: 'Dentech',             flag: '🇨🇳', loc: 'China'        },
-            { name: 'WCOI',                flag: '🇮🇳', loc: 'India'        },
+            { name: 'Arab Health',         code: 'ae' },
+            { name: 'AEEDC',               code: 'ae' },
+            { name: 'IDEX',                code: 'tr' },
+            { name: 'Dentech',             code: 'cn' },
+            { name: 'WCOI',                code: 'in' },
         ]},
         { year: '2025', events: [
-            { name: 'SIDC',                flag: '🇸🇦', loc: 'Saudi Arabia' },
-            { name: 'AEEDC',               flag: '🇦🇪', loc: 'UAE'          },
-            { name: 'IDS',                 flag: '🇩🇪', loc: 'Germany'      },
-            { name: 'VIDEC',               flag: '🇻🇳', loc: 'Vietnam'      },
-            { name: 'CADEX',               flag: '🇰🇿', loc: 'Kazakhstan'   },
-            { name: 'BIBAN',               flag: '🇸🇦', loc: 'Saudi Arabia' },
+            { name: 'SIDC',                code: 'sa' },
+            { name: 'AEEDC',               code: 'ae' },
+            { name: 'IDS',                 code: 'de' },
+            { name: 'VIDEC',               code: 'vn' },
+            { name: 'CADEX',               code: 'kz' },
+            { name: 'BIBAN',               code: 'sa' },
         ]},
         { year: '2026', events: [
-            { name: 'AEEDC',               flag: '🇦🇪', loc: 'UAE'          },
+            { name: 'AEEDC',               code: 'ae' },
         ]},
     ];
 
     const total     = EXPO_DATA.reduce((sum, y) => sum + y.events.length, 0);
-    const countries = [...new Set(EXPO_DATA.flatMap(y => y.events.map(e => e.loc)))].length;
+    const countries = [...new Set(EXPO_DATA.flatMap(y => y.events.map(e => e.code)))].length;
 
     const timelineHtml = EXPO_DATA.map(y => `
         <div class="expo-year-block">
@@ -693,16 +693,19 @@ function buildExhibitionCard() {
             <div class="expo-events">
                 ${y.events.map(e => `
                     <div class="expo-event-chip">
-                        <span class="expo-flag">${e.flag}</span>
+                        <img src="https://flagcdn.com/20x15/${e.code}.png"
+                             srcset="https://flagcdn.com/40x30/${e.code}.png 2x"
+                             width="20" height="15"
+                             alt="${e.code}"
+                             class="expo-flag-img">
                         <span class="expo-event-name">${e.name}</span>
-                        <span class="expo-location">${e.loc}</span>
                     </div>`).join('')}
             </div>
         </div>`).join('');
 
     return `
         <div class="bot-history-card" style="padding:0; overflow:hidden;">
-            <div style="background:linear-gradient(135deg,#F0798C 0%,#c94e6e 100%); padding:14px 18px;">
+            <div style="background:#EC6D75; padding:14px 18px;">
                 <div style="color:#fff; font-weight:700; font-size:0.95rem;">🌍 Global Exhibition Presence</div>
                 <div style="color:rgba(255,255,255,0.82); font-size:0.74rem; margin-top:3px;">${total} exhibitions · ${countries} countries · 2019–2026</div>
             </div>
@@ -716,7 +719,7 @@ function showCompanyExhibition() {
     appendMessage(buildExhibitionCard(), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showCompanyProfile },
-        { label: '🏠 Main Menu', onClick: showMainMenu       },
+        { label: 'Main Menu', onClick: showMainMenu       },
     ]);
 }
 
@@ -725,11 +728,11 @@ function showCompanyProfile() {
     chatState.section = 'company';
     appendMessage('Select a topic about DenQ:', 'bot', false);
     showButtons([
-        { label: ' History',      onClick: showCompanyHistory    },
-        { label: ' R&D',          onClick: showCompanyRD         },
-        { label: ' Organization', onClick: showCompanyOrg        },
-        { label: ' Exhibition',   onClick: showCompanyExhibition },
-        { label: ' Main Menu',    onClick: showMainMenu          },
+        { label: 'History',      onClick: showCompanyHistory    },
+        { label: 'R&D',          onClick: showCompanyRD         },
+        { label: 'Organization', onClick: showCompanyOrg        },
+        { label: 'Exhibition',   onClick: showCompanyExhibition },
+        { label: 'Main Menu',    onClick: showMainMenu          },
     ]);
 }
 
@@ -744,8 +747,8 @@ function showOtherMenu() {
     appendMessage('Here are the most asked questions about DenQ:', 'bot', false);
     appendMessage(buildFaqAccordion(), 'bot', true);
     showButtons([
-        { label: '📞 Contact',   onClick: showContactInfo },
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
+        { label: 'Contact',   onClick: showContactInfo },
+        { label: 'Main Menu', onClick: showMainMenu    },
     ]);
 }
 
@@ -778,8 +781,8 @@ function showCertificateInfo() {
             </div>
         </div>`, 'bot', true);
     showButtons([
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
-        { label: '📞 Contact',   onClick: showContactInfo },
+        { label: 'Main Menu', onClick: showMainMenu    },
+        { label: 'Contact',   onClick: showContactInfo },
     ]);
 }
 
@@ -790,8 +793,8 @@ function showCertificateInfo() {
 function showContactInfo() {
     appendMessage(buildContactCard(), 'bot', true);
     showButtons([
-        { label: '🦷 Implant',   onClick: showImplantMenu },
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
+        { label: 'Implant',   onClick: showImplantMenu },
+        { label: 'Main Menu', onClick: showMainMenu    },
     ]);
 }
 
@@ -809,7 +812,7 @@ function showBusinessInquiry() {
                 </p>
                 <div class="info-guide-wa">
                     <span>💬</span>
-                    <span>WhatsApp &nbsp;<span class="info-guide-wa-number">+82 10 8210-9792</span></span>
+                    <span>WhatsApp &nbsp;<span class="info-guide-wa-number">+82 10 8210 9792</span></span>
                 </div>
                 <div class="info-guide-divider">Please include in your message</div>
                 <ul class="info-guide-list">
@@ -827,8 +830,8 @@ function showBusinessInquiry() {
             </div>
         </div>`, 'bot', true);
     showButtons([
-        { label: '📞 Contact',   onClick: showContactInfo },
-        { label: '🏠 Main Menu', onClick: showMainMenu    },
+        { label: 'Contact',   onClick: showContactInfo },
+        { label: 'Main Menu', onClick: showMainMenu    },
     ]);
 }
 
@@ -913,8 +916,8 @@ function handleFreeText(text) {
         ];
         appendMessage(replies[Math.floor(Math.random() * replies.length)], 'bot', false);
         showButtons([
-            { label: '🏠 Main Menu', onClick: showMainMenu    },
-            { label: '📞 Contact',   onClick: showContactInfo },
+            { label: 'Main Menu', onClick: showMainMenu    },
+            { label: 'Contact',   onClick: showContactInfo },
         ]);
         return;
     }
@@ -924,9 +927,9 @@ function handleFreeText(text) {
         appendMessage("We don't carry a Guide Kit at the moment — but we do offer our Taper Surgical Kit, which covers your surgical needs. Here's the full detail:", 'bot', false);
         appendMessage(buildProductCard('surgical'), 'bot', true);
         showButtons([
-            { label: '🧰 Surgical KIT', onClick: showSurgicalDetail },
-            { label: '🦷 Implant',      onClick: showImplantMenu    },
-            { label: '🏠 Main Menu',    onClick: showMainMenu       },
+            { label: 'Surgical KIT', onClick: showSurgicalDetail },
+            { label: 'Implant',      onClick: showImplantMenu    },
+            { label: 'Main Menu',    onClick: showMainMenu       },
         ]);
         return;
     }
@@ -939,8 +942,8 @@ function handleFreeText(text) {
                 appendMessage(`Here's the info on **${info?.title}**:`, 'bot', false);
                 appendMessage(buildEndoCard(item.key), 'bot', true);
                 showButtons([
-                    { label: '🏠 Main Menu', onClick: showMainMenu    },
-                    { label: '📞 Contact',   onClick: showContactInfo },
+                    { label: 'Main Menu', onClick: showMainMenu    },
+                    { label: 'Contact',   onClick: showContactInfo },
                 ]);
             } else {
                 const info = PRODUCT_DETAIL[item.key];
@@ -950,15 +953,15 @@ function handleFreeText(text) {
                     setTimeout(() => {
                         appendMessage('Would you like to see the Size & Code?', 'bot', false);
                         showButtons([
-                            { label: '✅ Yes',       onClick: () => { appendMessage(buildSizeCard(item.key), 'bot', true); showButtons([{ label: '🏠 Main Menu', onClick: showMainMenu }]); }},
-                            { label: '❌ No',        onClick: showMainMenu    },
-                            { label: '🏠 Main Menu', onClick: showMainMenu    },
+                            { label: 'Yes',       onClick: () => { appendMessage(buildSizeCard(item.key), 'bot', true); showButtons([{ label: 'Main Menu', onClick: showMainMenu }]); }},
+                            { label: 'No',        onClick: showMainMenu    },
+                            { label: 'Main Menu', onClick: showMainMenu    },
                         ]);
                     }, 600);
                 } else {
                     showButtons([
-                        { label: '🏠 Main Menu', onClick: showMainMenu    },
-                        { label: '📞 Contact',   onClick: showContactInfo },
+                        { label: 'Main Menu', onClick: showMainMenu    },
+                        { label: 'Contact',   onClick: showContactInfo },
                     ]);
                 }
             }
@@ -979,9 +982,9 @@ function handleFreeText(text) {
     if (/\bce\b.*\b(mark|marks|marking|certificate|cert|certified)\b|\b(ce mark|ce marks|ce certificate)\b/.test(t)) {
         appendMessage("DenQ's CE Mark certification is currently in progress — we're actively working on it and expect to have it available soon. In the meantime, DenQ holds FDA, ISO 13485, and MFDS certifications. Feel free to contact us if you need more details!", 'bot', false);
         showButtons([
-            { label: '🏅 Certificate', onClick: showCertificateInfo },
-            { label: '📞 Contact',     onClick: showContactInfo     },
-            { label: '🏠 Main Menu',   onClick: showMainMenu        },
+            { label: 'Certificate', onClick: showCertificateInfo },
+            { label: 'Contact',     onClick: showContactInfo     },
+            { label: 'Main Menu',   onClick: showMainMenu        },
         ]);
         return;
     }
