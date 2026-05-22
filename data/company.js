@@ -33,6 +33,6 @@ const COMPANY_DATA = {
 };
 
 const CATALOG_DATA = {
-    catalog:  '../DenQ_Catalog.pdf',
-    brochure: '../DenQ_Brochure.pdf',
+    catalog:  '../Dowload%20Files/DenQ_Catalog.pdf',
+    brochure: '../Dowload%20Files/DenQ_Brochure.pdf',
 };
