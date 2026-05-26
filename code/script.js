@@ -277,7 +277,7 @@ function buildContactCard() {
                 </div>
             </div>
             <div class="bot-product-body">
-                <a href="https://forms.gle/NDG1ERtjvv9GmX2HA" target="_blank" class="contact-form-btn">📝 Send an Inquiry</a>
+                <a href="https://forms.gle/NDG1ERtjvv9GmX2HA" target="_blank" class="contact-form-btn">📝 Fill out The Form </a>
                 <div class="contact-row"><span class="contact-icon">💬</span><span class="contact-label">WhatsApp</span><span class="contact-value"><a href="https://wa.me/821082109792" target="_blank">+82 10 8210 9792</a></span></div>
                 <div class="contact-row"><span class="contact-icon">📧</span><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:biz@denq.kr">biz@denq.kr</a></span></div>
                 <div class="contact-row"><span class="contact-icon">🌐</span><span class="contact-label">Website</span><span class="contact-value"><a href="https://denq.kr" target="_blank">denq.kr</a></span></div>
@@ -613,7 +613,7 @@ function buildCompanyRDCard() {
 
 function showCompanyRD() {
     chatState.section = 'company_rd';
-    appendMessage('🔬 DenQ Research and Development:', 'bot', false);
+    appendMessage('DenQ Research and Development:', 'bot', false);
     appendMessage(buildCompanyRDCard(), 'bot', true);
     showButtons([
         { label: '◀ Back',       onClick: showCompanyProfile },
@@ -649,16 +649,16 @@ function buildExhibitionCard() {
             { name: 'Dentech China',       code: 'cn' },
         ]},
         { year: '2020', events: [
-            { name: 'AEEDC Dubai',         code: 'ae' },
+            { name: 'AEEDC',               code: 'ae' },
         ]},
         { year: '2022', events: [
-            { name: 'AEEDC Dubai',         code: 'ae' },
+            { name: 'AEEDC',               code: 'ae' },
             { name: 'IDS',                 code: 'de' },
             { name: 'Expodent Mumbai',     code: 'in' },
             { name: 'Expodent New Delhi',  code: 'in' },
         ]},
         { year: '2023', events: [
-            { name: 'AEEDC Dubai',         code: 'ae' },
+            { name: 'AEEDC',               code: 'ae' },
             { name: 'IDS',                 code: 'de' },
             { name: 'IDEC',                code: 'id' },
             { name: 'CADEX',               code: 'kz' },
@@ -666,14 +666,14 @@ function buildExhibitionCard() {
         ]},
         { year: '2024', events: [
             { name: 'Arab Health',         code: 'ae' },
-            { name: 'AEEDC Dubai',         code: 'ae' },
+            { name: 'AEEDC',               code: 'ae' },
             { name: 'IDEX',                code: 'tr' },
             { name: 'Dentech China',       code: 'cn' },
             { name: 'WCOI',                code: 'in' },
         ]},
         { year: '2025', events: [
             { name: 'SIDC',                code: 'sa' },
-            { name: 'AEEDC Dubai',         code: 'ae' },
+            { name: 'AEEDC',               code: 'ae' },
             { name: 'IDS',                 code: 'de' },
             { name: 'VIDEC',               code: 'vn' },
             { name: 'CADEX',               code: 'kz' },
@@ -802,7 +802,7 @@ function showBusinessInquiry() {
     appendMessage(`
         <div class="info-guide-card">
             <div class="info-guide-head">
-                <span class="info-guide-icon">💼</span>
+                <span class="info-guide-icon"></span>
                 <div class="info-guide-title">Pricing &amp; Distribution Inquiry</div>
                 <div class="info-guide-subtitle">Connect directly with our team</div>
             </div>
@@ -849,12 +849,12 @@ function showFallbackGuide() {
                 </p>
                 <div class="info-guide-divider">What you can explore</div>
                 <ul class="info-guide-list">
-                    <li><span class="info-guide-num">1</span><span>🦷 Implant — Fixtures, abutments, surgical kits &amp; more</span></li>
-                    <li><span class="info-guide-num">2</span><span>🔬 Endo — Endodontic remover &amp; condenser instruments</span></li>
-                    <li><span class="info-guide-num">3</span><span>🏢 Company — CEO profile, history &amp; R&amp;D achievements</span></li>
-                    <li><span class="info-guide-num">4</span><span>🏅 Certificates — FDA, ISO 13485 &amp; MFDS certifications</span></li>
-                    <li><span class="info-guide-num">5</span><span>📋 Catalog — Download our full product catalog &amp; brochure</span></li>
-                    <li><span class="info-guide-num">6</span><span>💡 FAQs — Frequently asked questions &amp; resources</span></li>
+                    <li><span class="info-guide-num">1</span><span> Implant — Fixtures, abutments, surgical kits &amp; more</span></li>
+                    <li><span class="info-guide-num">2</span><span> Endo — Endodontic remover &amp; condenser instruments</span></li>
+                    <li><span class="info-guide-num">3</span><span> Company — CEO profile, history &amp; R&amp;D achievements</span></li>
+                    <li><span class="info-guide-num">4</span><span> Certificates — FDA, ISO 13485 &amp; MFDS certifications</span></li>
+                    <li><span class="info-guide-num">5</span><span> Catalog — Download our full product catalog &amp; brochure</span></li>
+                    <li><span class="info-guide-num">6</span><span> FAQs — Frequently asked questions &amp; resources</span></li>
                 </ul>
                 <div class="info-guide-footer">
                     Tap a button below or type a product name to get started!
