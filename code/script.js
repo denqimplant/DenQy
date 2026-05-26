@@ -658,7 +658,7 @@ function buildExhibitionCard() {
             { name: 'Expodent New Delhi',  code: 'in' },
         ]},
         { year: '2023', events: [
-            { name: 'AEEDC',               code: 'ae' },
+            { name: 'AEEDC Dubai',         code: 'ae' },
             { name: 'IDS',                 code: 'de' },
             { name: 'IDEC',                code: 'id' },
             { name: 'CADEX',               code: 'kz' },
@@ -666,21 +666,21 @@ function buildExhibitionCard() {
         ]},
         { year: '2024', events: [
             { name: 'Arab Health',         code: 'ae' },
-            { name: 'AEEDC',               code: 'ae' },
+            { name: 'AEEDC Dubai',         code: 'ae' },
             { name: 'IDEX',                code: 'tr' },
-            { name: 'Dentech',             code: 'cn' },
+            { name: 'Dentech China',       code: 'cn' },
             { name: 'WCOI',                code: 'in' },
         ]},
         { year: '2025', events: [
             { name: 'SIDC',                code: 'sa' },
-            { name: 'AEEDC',               code: 'ae' },
+            { name: 'AEEDC Dubai',         code: 'ae' },
             { name: 'IDS',                 code: 'de' },
             { name: 'VIDEC',               code: 'vn' },
             { name: 'CADEX',               code: 'kz' },
             { name: 'BIBAN',               code: 'sa' },
         ]},
         { year: '2026', events: [
-            { name: 'AEEDC',               code: 'ae' },
+            { name: 'AEEDC Dubai',         code: 'ae' },
         ]},
     ];
 
