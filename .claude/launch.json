@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "denq-chatbot",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "3456", "C:/Users/LG/Documents/James/ChatBot"],
+      "port": 3456
+    }
+  ]
+}

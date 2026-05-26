@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            width: 1200px;
+            height: 630px;
+            overflow: hidden;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: #fff;
+        }
+
+        .banner {
+            width: 1200px;
+            height: 630px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Soft background accent */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+        }
+        .bg-c1 {
+            width: 700px; height: 700px;
+            background: rgba(236, 109, 117, 0.06);
+            top: -200px; right: -150px;
+        }
+        .bg-c2 {
+            width: 400px; height: 400px;
+            background: rgba(236, 109, 117, 0.04);
+            bottom: -140px; left: -80px;
+        }
+        .bg-c3 {
+            width: 180px; height: 180px;
+            background: rgba(236, 109, 117, 0.05);
+            top: 60px; left: 60px;
+        }
+
+        /* Top accent bar */
+        .top-bar {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #EC6D75 0%, #c94e6e 100%);
+        }
+
+        /* Content */
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+            z-index: 1;
+            text-align: center;
+        }
+
+        /* Logo */
+        .logo-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .logo-box {
+            width: 110px;
+            height: 110px;
+            background: #fff;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 40px rgba(236, 109, 117, 0.18), 0 4px 16px rgba(0,0,0,0.08);
+            padding: 14px;
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .company-name {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1a1a2e;
+            letter-spacing: -0.5px;
+            line-height: 1.1;
+        }
+
+        .company-sub {
+            font-size: 15px;
+            font-weight: 500;
+            color: #6b7280;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* Divider line */
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #EC6D75, #c94e6e);
+            border-radius: 999px;
+        }
+
+        /* Tagline */
+        .tagline {
+            font-size: 22px;
+            font-weight: 500;
+            color: #4b5563;
+            line-height: 1.5;
+            max-width: 560px;
+        }
+
+        /* CTA Button */
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #EC6D75 0%, #c94e6e 100%);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 18px 44px;
+            border-radius: 999px;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+            box-shadow: 0 12px 36px rgba(236, 109, 117, 0.4), 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .cta-arrow {
+            font-size: 20px;
+            font-weight: 900;
+        }
+
+        /* Cert badges row */
+        .cert-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cert-badge {
+            background: rgba(236, 109, 117, 0.08);
+            border: 1.5px solid rgba(236, 109, 117, 0.25);
+            color: #c94e6e;
+            border-radius: 999px;
+            padding: 6px 18px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        /* URL at bottom */
+        .bottom-url {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            font-weight: 500;
+            color: #9ca3af;
+            letter-spacing: 0.5px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <!-- Background -->
+        <div class="top-bar"></div>
+        <div class="bg-circle bg-c1"></div>
+        <div class="bg-circle bg-c2"></div>
+        <div class="bg-circle bg-c3"></div>
+
+        <!-- Main content -->
+        <div class="content">
+
+            <!-- Logo + name -->
+            <div class="logo-wrap">
+                <div class="logo-box">
+                    <img src="pictures/DenQ_Logo.png" alt="DenQ Logo">
+                </div>
+                <div>
+                    <div class="company-name">DenQ Implant Co., Ltd</div>
+                    <div class="company-sub">Busan, South Korea</div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Tagline -->
+            <div class="tagline">
+                Explore our dental implants products<br>and background.
+            </div>
+
+            <!-- CTA -->
+            <a class="cta-btn" href="#">
+                Explore DenQ Products
+                <span class="cta-arrow">→</span>
+            </a>
+
+            <!-- Cert badges -->
+            <div class="cert-row">
+                <span class="cert-badge">FDA ✓</span>
+                <span class="cert-badge">ISO 13485 ✓</span>
+                <span class="cert-badge">MFDS ✓</span>
+            </div>
+
+        </div>
+
+        <div class="bottom-url">denq.kr &nbsp;·&nbsp; biz@denq.kr</div>
+    </div>
+</body>
+</html>
