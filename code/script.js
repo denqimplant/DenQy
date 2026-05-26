@@ -680,7 +680,7 @@ function buildExhibitionCard() {
             { name: 'BIBAN',               code: 'sa' },
         ]},
         { year: '2026', events: [
-            { name: 'AEEDC Dubai',         code: 'ae' },
+            { name: 'AEEDC',               code: 'ae' },
         ]},
     ];
 
