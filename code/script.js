@@ -278,9 +278,9 @@ function buildContactCard() {
             </div>
             <div class="bot-product-body">
                 <a href="https://forms.gle/NDG1ERtjvv9GmX2HA" target="_blank" class="contact-form-btn">Fill out the Form</a>
-                <div class="contact-row"><span class="contact-icon">💬</span><span class="contact-label">WhatsApp(Consultation)</span><span class="contact-value"><a href="https://wa.me/821082109792" target="_blank">+82 10 8210 9792</a></span></div>
-                <div class="contact-row"><span class="contact-icon">📧</span><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:biz@denq.kr">biz@denq.kr</a></span></div>
-                <div class="contact-row"><span class="contact-icon">🌐</span><span class="contact-label">Website</span><span class="contact-value"><a href="https://denq.kr" target="_blank">denq.kr</a></span></div>
+                <div class="contact-row"><span class="contact-icon">💬</span><div class="contact-info"><span class="contact-label">WhatsApp (Consultation)</span><span class="contact-value"><a href="https://wa.me/821082109792" target="_blank">+82 10 8210 9792</a></span></div></div>
+                <div class="contact-row"><span class="contact-icon">📧</span><div class="contact-info"><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:biz@denq.kr">biz@denq.kr</a></span></div></div>
+                <div class="contact-row"><span class="contact-icon">🌐</span><div class="contact-info"><span class="contact-label">Website</span><span class="contact-value"><a href="https://denq.kr" target="_blank">denq.kr</a></span></div></div>
             </div>
         </div>`;
 }
