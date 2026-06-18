@@ -1390,9 +1390,7 @@ body {
 /* ── RIGHT PANEL — NEW STYLES ─────────────────────────────────── */
 .rp-brand {
     text-align: center;
-    padding-bottom: 14px;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 14px;
+    margin-bottom: 10px;
 }
 
 .rp-title {
