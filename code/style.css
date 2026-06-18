@@ -548,7 +548,7 @@ body {
 .contact-label {
     font-weight: 700;
     color: var(--text-muted);
-    width: 68px;
+    white-space: nowrap;
     flex-shrink: 0;
     font-size: 0.72rem;
     text-transform: uppercase;
@@ -559,6 +559,9 @@ body {
     color: var(--text-main);
     font-weight: 500;
     font-size: 0.81rem;
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
 }
 
 /* ── PACKING IMAGE ────────────────────────────────────────────── */
