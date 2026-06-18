@@ -273,11 +273,11 @@ function buildContactCard() {
             <div class="bot-product-card-header">
                 <div class="bot-product-copy" style="padding:0">
                     <div class="bot-product-title">📞 Contact DenQ</div>
-                    <div class="bot-product-subtitle">We're here to help · 24 / 7</div>
+                    <div class="bot-product-subtitle"> We're here to help </div>
                 </div>
             </div>
             <div class="bot-product-body">
-                <a href="https://forms.gle/NDG1ERtjvv9GmX2HA" target="_blank" class="contact-form-btn">📝 Fill out The Form </a>
+                <a href="https://forms.gle/NDG1ERtjvv9GmX2HA" target="_blank" class="contact-form-btn">📝 For Prompt Consultation </a>
                 <div class="contact-row"><span class="contact-icon">💬</span><span class="contact-label">WhatsApp</span><span class="contact-value"><a href="https://wa.me/821082109792" target="_blank">+82 10 8210 9792</a></span></div>
                 <div class="contact-row"><span class="contact-icon">📧</span><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:biz@denq.kr">biz@denq.kr</a></span></div>
                 <div class="contact-row"><span class="contact-icon">🌐</span><span class="contact-label">Website</span><span class="contact-value"><a href="https://denq.kr" target="_blank">denq.kr</a></span></div>
