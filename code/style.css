@@ -514,13 +514,21 @@ body {
 /* ── CONTACT ROWS ─────────────────────────────────────────────── */
 .contact-row {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
     padding: 9px 0;
     border-bottom: 1px solid #f5f5f5;
 }
 
 .contact-row:last-child { border-bottom: none; }
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+}
 
 /* Google Form / inquiry button inside Contact card */
 .contact-form-btn {
