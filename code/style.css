@@ -1588,8 +1588,8 @@ body {
     }
 
     /* Panels stack below chat */
-    .right-panel { order: 2; width: 100%; max-width: 100%; display: block; }
-    .left-panel  { order: 3; width: 100%; max-width: 100%; display: flex !important; }
+    .left-panel  { order: 2; width: 100%; max-width: 100%; display: flex !important; }
+    .right-panel { order: 3; width: 100%; max-width: 100%; display: block; }
     .side-panel  { width: 100%; border-radius: 14px; }
 
     /* Cards go full-width */
