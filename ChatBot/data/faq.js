@@ -13,14 +13,14 @@ const FAQ_CURATED = [
     { q: 'Are DenQ Implants compatible with other major brand?',
       a: 'Yes, DenQ Sub SLA Fixture is compatible with 11° morse taper & 2.5 internal Hex Regular Connection' },
     { q: 'What certifications does DenQ hold?',
-      a: 'DenQ Implant holds FDA 510(k), MFDS (Korean FDA), ISO 13485 approved. ' },
+      a: 'DenQ Implant holds FDA 510(k), MFDS(Korean FDA), ISO 13485 approved.' },
     { q: 'Does DenQ Implant offer a product warranty?',
       a: 'Yes, DenQ Implant provides a standard 5-year warranty on all products.' },
     { q: 'Where does DenQ currently distribute to?',
       a: 'DenQ implant is currently active in the Middle East and the CIS Region.' },
     { q: 'How can I inquire about purchasing products?',
-      a: 'For products inquiries, please visit [ DenQy Contact Us] and submit the google form.The representative will reach out to you.' },
+      a: 'For products inquiries, please visit [DenQy Contact Us] and submit the google form.The representative will reach out to you.' },
     { q: 'How can I create a new account?',
-      a: 'To sign up, navigate to the “Main” page and click on the [Join ] button. Fill out the form with your information to complete the registration process.' },
+      a: 'To sign up, navigate to the “Main” page and click on the [Join] button. Fill out the form with your information to complete the registration process.' },
 ];
 
