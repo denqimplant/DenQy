@@ -66,7 +66,7 @@ function scrollPageToChat() {
     }
 }
 
-function appendMessage(text, senderType, isHTML = false) {
+function appendMessage(text, senderType, isHTML = false, showTimestamp = true) {
     const wrapper = document.createElement('div');
     wrapper.classList.add('message-wrapper', senderType === 'bot' ? 'wrapper-bot' : 'wrapper-user');
 
@@ -75,25 +75,28 @@ function appendMessage(text, senderType, isHTML = false) {
     if (isHTML) { bubble.innerHTML  = text; }
     else        { bubble.textContent = text; }
 
-    const time = document.createElement('div');
-    time.classList.add('timestamp');
-    time.textContent = getCurrentTimestamp();
-
     wrapper.appendChild(bubble);
-    wrapper.appendChild(time);
+
+    if (showTimestamp) {
+        const time = document.createElement('div');
+        time.classList.add('timestamp');
+        time.textContent = getCurrentTimestamp();
+        wrapper.appendChild(time);
+    }
+
     chatMessages.appendChild(wrapper);
     chatMessages.scrollTop = chatMessages.scrollHeight;
 
-    // On mobile: bring chat into view whenever bot replies
     if (senderType === 'bot') scrollPageToChat();
 }
 
-function showButtons(buttons) {
+function showButtons(buttons, containerClass = '') {
     const wrapper = document.createElement('div');
-    wrapper.classList.add('message-wrapper', 'wrapper-bot');
+    wrapper.classList.add('message-wrapper', 'wrapper-bot', 'wrapper-buttons');
 
     const container = document.createElement('div');
     container.classList.add('btn-chip-container');
+    if (containerClass) container.classList.add(containerClass);
 
     buttons.forEach(btn => {
         const el = document.createElement('button');
@@ -336,14 +339,27 @@ function buildFaqAccordion() {
 //  LEVEL 0 — MAIN MENU
 // ═══════════════════════════════════════════════════════════════════
 
+function showIntro() {
+    const checkHtml = [
+        '24/7 Dental Implant Assistance',
+        'Get Product Information in Seconds',
+        'Instant Access to Catalogs &amp; Brochures',
+        'Quick Answers to Your Product Questions',
+    ].map(t => `<span style="color:var(--denq-pink);font-weight:700;">✓</span> <em>${t}</em>`).join('<br>');
+
+    setTimeout(() => appendMessage('<em>Welcome to DenQ Implant AI-assistant</em>', 'bot', true, false), 0);
+    setTimeout(() => appendMessage('<em>Here is what DenQy can do for you:</em>', 'bot', true, false), 1500);
+    setTimeout(() => appendMessage(checkHtml, 'bot', true, true), 2800);
+    setTimeout(() => showMainMenu(), 3800);
+}
+
 function showMainMenu() {
     chatState.level          = 0;
     chatState.section        = null;
     chatState.subSection     = null;
     chatState.currentProduct = null;
 
-    appendMessage('Welcome to DenQy Info Provider 😊', 'bot', false);
-    showButtons(MAIN_MENU.map(item => ({ label: item.label, onClick: item.onClick })));
+    showButtons(MAIN_MENU.map(item => ({ label: item.label, onClick: item.onClick })), 'btn-chip-main-menu');
 }
 
 // ── Sidebar quick-link helper ──────────────────────────────────────
@@ -507,10 +523,10 @@ function buildEndoCard(key) {
             </div>
             <div class="bot-product-body">
                 ${info.image ? `<img src="${IMG}${info.image}" alt="${info.title}"
-                    class="endo-product-image-large"
+                    class="bot-product-image"
                     onclick="openImageModal('${IMG}${info.image}','${info.title}')">` : ''}
                 ${info.details ? `<p class="bot-product-details">${info.details}</p>` : ''}
-                ${specsHtml ? `<ul class="bot-product-specs">${specsHtml}</ul>` : ''}
+                ${specsHtml ? `<ul class="bot-product-features">${specsHtml}</ul>` : ''}
             </div>
         </div>`;
 }
@@ -704,10 +720,12 @@ function buildExhibitionCard() {
         </div>`).join('');
 
     return `
-        <div class="bot-history-card" style="padding:0; overflow:hidden;">
-            <div style="background:#EC6D75; padding:14px 18px;">
-                <div style="color:#fff; font-weight:700; font-size:0.95rem;">🌍 Global Exhibition Presence</div>
-                <div style="color:rgba(255,255,255,0.82); font-size:0.74rem; margin-top:3px;">${total} exhibitions · ${countries} countries · 2019–2026</div>
+        <div class="bot-product-card">
+            <div class="bot-product-card-header">
+                <div class="bot-product-copy" style="padding:0">
+                    <div class="bot-product-title">🌍 Global Exhibition Presence</div>
+                    <div class="bot-product-subtitle">${total} exhibitions · ${countries} countries · 2019–2026</div>
+                </div>
             </div>
             <div class="expo-timeline">${timelineHtml}</div>
         </div>`;
@@ -861,7 +879,7 @@ function showFallbackGuide() {
                 </div>
             </div>
         </div>`, 'bot', true);
-    showButtons(MAIN_MENU.map(item => ({ label: item.label, onClick: item.onClick })));
+    showButtons(MAIN_MENU.map(item => ({ label: item.label, onClick: item.onClick })), 'btn-chip-main-menu');
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -1028,7 +1046,7 @@ function closeImageModal() {
 // ═══════════════════════════════════════════════════════════════════
 
 document.addEventListener('DOMContentLoaded', () => {
-    showMainMenu();
+    showIntro();
 
     const closeBtn = document.querySelector('.modal-close');
     if (closeBtn) closeBtn.addEventListener('click', closeImageModal);
