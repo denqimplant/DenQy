@@ -251,6 +251,7 @@ body {
     flex-grow: 1;
     min-height: 0;
     height: clamp(380px, 55vh, 520px);
+    height: clamp(380px, 55svh, 520px);
     padding: 18px;
     overflow-y: auto;
     display: flex;
@@ -269,22 +270,47 @@ body {
 .wrapper-bot  { align-self: flex-start; }
 .wrapper-user { align-self: flex-end; align-items: flex-end; }
 
+/* Card wrappers stretch to fill available chat width */
+.wrapper-bot:has(.bot-product-card),
+.wrapper-bot:has(.faq-card),
+.wrapper-bot:has(.bot-history-card) {
+    width: 96%;
+    max-width: 96%;
+    align-self: stretch;
+}
+
+/* Button rows stretch full width so the grid can center itself */
+.wrapper-buttons {
+    width: 100%;
+    max-width: 100%;
+    align-self: stretch;
+}
+
 .message {
     padding: 12px 16px;
     border-radius: 16px;
-    font-size: 0.95em;
+    font-size: 0.9rem;
     line-height: 1.5;
 }
 
 .bot-message {
-    background: linear-gradient(135deg, #f0f4f8 0%, #e9ecef 100%);
-    color: var(--text-main);
+    background: linear-gradient(135deg, #ffffff 0%, #fdf5f7 100%);
+    color: #1a1a1a;
     border-bottom-left-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 8px rgba(236,109,117,0.08);
 }
 
-.bot-message a  { color: var(--denq-pink); text-decoration: underline; }
-.bot-message strong { color: var(--denq-pink); }
+.bot-message a { color: var(--denq-pink); text-decoration: underline; }
+
+/* Cards sit inside a message bubble — strip bg/padding so the card shows cleanly */
+.bot-message:has(.bot-product-card),
+.bot-message:has(.faq-card),
+.bot-message:has(.info-guide-card),
+.bot-message:has(.bot-history-card) {
+    background: transparent;
+    padding: 0;
+    box-shadow: none;
+}
 
 .user-message {
     background-color: var(--denq-pink);
@@ -304,9 +330,18 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
-    margin-top: 8px;
+    margin: 8px auto 0;
     max-width: 460px;
     width: 100%;
+}
+
+/* Main menu: always 3-col, full width, Contact Us spans all 3 */
+.btn-chip-main-menu {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 100%;
+}
+.btn-chip-main-menu .btn-chip:last-child {
+    grid-column: 1 / -1;
 }
 
 .btn-chip {
@@ -320,7 +355,7 @@ body {
     border-radius: 14px;
     padding: 10px 12px;
     min-height: 44px;
-    font-size: clamp(0.76rem, 1.2vw, 0.84rem);
+    font-size: 0.78rem;
     font-weight: 600;
     font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     cursor: pointer;
@@ -351,7 +386,7 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-.message { animation: messageIn 0.25s ease; }
+.message { animation: messageIn 0.12s ease; }
 
 /* ── TYPING INDICATOR ─────────────────────────────────────────── */
 .typing-wrapper {
@@ -395,9 +430,8 @@ body {
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(236,109,117,0.1), 0 1px 4px rgba(0,0,0,0.04);
     margin-top: 4px;
-    animation: cardEntrance 0.4s ease;
+    animation: cardEntrance 0.2s ease;
     border: 1px solid rgba(236,109,117,0.12);
-    max-width: 340px;
     width: 100%;
 }
 
@@ -486,6 +520,11 @@ body {
     list-style: none;
     margin: 8px 0 0;
     padding: 0;
+}
+
+.bot-product-features.features-4col {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
 }
 
 .bot-product-features li {
@@ -596,7 +635,7 @@ body {
     border-radius: 18px;
     overflow: hidden;
     box-shadow: 0 8px 28px rgba(236,109,117,0.14), 0 2px 8px rgba(0,0,0,0.04);
-    animation: cardEntrance 0.4s ease;
+    animation: cardEntrance 0.2s ease;
     border: 1px solid rgba(236,109,117,0.1);
     max-width: 100%;
 }
@@ -828,7 +867,7 @@ body {
     padding: 10px 14px;
     border-radius: 12px;
     font-weight: 600;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     text-decoration: none;
     text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -860,7 +899,7 @@ body {
     padding: 20px;
     box-shadow: 0 6px 24px rgba(236,109,117,0.1), 0 2px 8px rgba(0,0,0,0.04);
     margin-top: 4px;
-    animation: cardEntrance 0.4s ease;
+    animation: cardEntrance 0.2s ease;
 }
 
 .bot-history-photo-block {
@@ -1043,6 +1082,7 @@ body {
     display: flex;
     align-items: center;
     padding: 16px;
+    padding-bottom: max(16px, env(safe-area-inset-bottom));
     border-top: 1px solid var(--border-color);
     background-color: var(--panel-bg);
     border-bottom-left-radius: 12px;
@@ -1135,7 +1175,7 @@ body {
     overflow: hidden;
     box-shadow: 0 4px 22px rgba(0,0,0,0.07);
     margin-top: 4px;
-    animation: cardEntrance 0.4s ease;
+    animation: cardEntrance 0.2s ease;
     max-width: 340px;
     border-top: 3px solid var(--denq-pink);
 }
@@ -1265,7 +1305,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    max-height: 380px;
+    max-height: 240px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -1547,47 +1587,61 @@ body {
 /* ═══════════════════════════════════════════════════════════════
    TABLET & MOBILE  (≤820px)
    – Page scrolls freely; panels stack below the chat
-   – chat-messages gets a reliable clamp() height — always visible
+   – svh = "small viewport height" — stable even when browser
+     address bar appears/disappears on mobile
    ═══════════════════════════════════════════════════════════════ */
 @media (max-width: 820px) {
 
     /* Allow natural page scroll */
     html, body {
         height: auto;
-        min-height: 100vh;
+        min-height: 100svh;
+        min-height: 100vh; /* fallback for older browsers */
+        min-height: 100svh;
         overflow-y: auto;
     }
 
     /* Stack panels vertically — break out of desktop flex-fill */
     .dashboard-layout {
-        flex: none;                  /* stop trying to fill body height */
+        flex: none;
         flex-direction: column;
         align-items: stretch;
         padding: 12px;
         gap: 14px;
     }
 
-    /* Chat goes first — sized naturally by its children */
+    /* Chat goes first — fills exactly the viewport so panels below stay hidden */
     .chat-container {
         order: 1;
         width: 100%;
         max-width: 100%;
-        flex: none;                  /* stop competing for flex space */
+        flex: none;
         border-radius: 16px;
+        height: calc(100vh - 10px);
+        height: calc(100svh - 10px);
     }
 
-    .chat-header     { flex-shrink: 0; border-radius: 16px 16px 0 0; }
-    .chat-input-area { flex-shrink: 0; border-radius: 0 0 16px 16px; padding: 12px 14px; }
+    .chat-header { flex-shrink: 0; border-radius: 16px 16px 0 0; }
 
-    /* Messages: tall fixed scroll box — fits most product cards comfortably */
+    /* Safe area for iPhone home bar */
+    .chat-input-area {
+        flex-shrink: 0;
+        border-radius: 0 0 16px 16px;
+        padding: 12px 14px;
+        padding-bottom: max(12px, env(safe-area-inset-bottom));
+    }
+
+    /* Messages grow to fill remaining space between header and input */
     .chat-messages {
-        height: clamp(500px, 72vh, 680px);
+        flex: 1;
+        height: auto;
+        min-height: 0;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
         padding: 16px;
     }
 
-    /* Panels stack below chat */
+    /* Panels stack below chat: left panel second, right panel last */
     .left-panel  { order: 2; width: 100%; max-width: 100%; display: flex !important; }
     .right-panel { order: 3; width: 100%; max-width: 100%; display: block; }
     .side-panel  { width: 100%; border-radius: 14px; }
@@ -1599,21 +1653,57 @@ body {
     .faq-card           { max-width: 100%; }
     .bot-history-card   { max-width: 100%; }
 
-    /* Buttons: 3 equal columns on tablet/mobile */
+    /* Buttons: 3 equal columns on tablet */
     .btn-chip-container {
         grid-template-columns: repeat(3, 1fr);
         max-width: 100%;
     }
 }
 
+/* ── TABLET CENTERING  (601px – 820px) ───────────────────────── */
+@media (min-width: 601px) and (max-width: 820px) {
+    .chat-container { max-width: 100%; }
+    .right-panel,
+    .left-panel     { max-width: 640px; margin: 0 auto; }
+}
+
 /* ── PHONE  (≤600px) ─────────────────────────────────────────── */
 @media (max-width: 600px) {
-    .dashboard-layout   { padding: 8px; gap: 10px; }
+    /* Full-bleed on phones — zero padding so panels can't peek */
+    .dashboard-layout { padding: 0; gap: 0; }
 
-    .chat-container  { border-radius: 14px; }
-    .chat-header     { border-radius: 14px 14px 0 0; }
-    .chat-input-area { border-radius: 0 0 14px 14px; padding: 10px 12px; }
-    .chat-messages   { height: clamp(460px, 68vh, 600px); overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 12px; }
+    .chat-container {
+        border-radius: 0;
+        height: 100vh;
+        height: 100svh;
+    }
+    .chat-header    { border-radius: 0; }
+
+    /* Safe area for iPhone home bar */
+    .chat-input-area {
+        border-radius: 0;
+        padding: 10px 12px;
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+    }
+
+    .chat-messages {
+        flex: 1;
+        height: auto;
+        min-height: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 12px;
+    }
+
+    /* Panels below get their own breathing room when scrolled to */
+    .left-panel  { margin-top: 16px; }
+    .right-panel { margin-top: 12px; }
+
+    /* 2 columns on phones — 3 is too tight below 600px */
+    .btn-chip-container { grid-template-columns: repeat(2, 1fr); }
+    /* Main menu keeps 3 columns + features-4col drops to 2 */
+    .btn-chip-main-menu { grid-template-columns: repeat(3, 1fr); }
+    .bot-product-features.features-4col { grid-template-columns: repeat(2, 1fr); }
 
     #user-input { font-size: 16px; }
     .pink-btn   { font-size: 16px; padding: 10px 14px; }
@@ -1625,7 +1715,13 @@ body {
 
 /* ── VERY SMALL PHONES  (≤380px) ─────────────────────────────── */
 @media (max-width: 380px) {
-    .chat-messages      { height: clamp(400px, 64vh, 540px); overflow-y: auto; -webkit-overflow-scrolling: touch; }
-    .btn-chip           { font-size: 0.72rem; padding: 9px 8px; }
+    .chat-messages {
+        flex: 1;
+        height: auto;
+        min-height: 0;
+    }
+    .btn-chip           { font-size: 0.74rem; padding: 9px 8px; min-height: 44px; }
     .btn-chip-container { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+    .btn-chip-main-menu { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .bot-product-features.features-4col { grid-template-columns: repeat(2, 1fr); }
 }
