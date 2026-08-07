@@ -72,9 +72,8 @@ const PRODUCT_DETAIL = {
 
     // FIXTURE
     fixture: {
-        image:     'SLA_Fixture.png',
-        sideImage: 'SLA_Fixture1.png',
-        title:     'DenQ Sub SLA Fixture',
+        image:  'SLA_Fixture.png',
+        title:  'DenQ Sub SLA Fixture',
         subtitle:  'Premium Dental Implant Solution',
         details:   'Typically Emphasized Features',
         specs: [
@@ -262,9 +261,6 @@ const PRODUCT_DETAIL = {
         image: 'DenQTaper.png', sideImage: 'Taper KIT.png', sizeImage: 'Surgical_Size.jpeg',
         title: 'DenQ Sync Taper Basic Kit', subtitle: 'Complete Implant Placement System',
         details: 'DenQ Sync Taper Basic Kit',
-        specs: [
-            'Simple KIT: 13 drills',
-            'Full KIT: 25 drills',
-        ],
+        specs: [],
     },
 };
