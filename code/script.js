@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════════
-//  DenQ Chatbot  —  UI Logic & Navigation
+//  DenQ Chatbot  —  UI Logic & Navigation 
 //  Data is loaded from:  data/company.js  |  data/implant.js
 // ═══════════════════════════════════════════════════════════════════
 
