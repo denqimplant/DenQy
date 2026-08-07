@@ -1,11 +1,14 @@
 // ═══════════════════════════════════════════════════════════════════
-//  DenQ Chatbot  —  UI Logic & Navigation 
+//  DenQ Chatbot  —  UI Logic & Navigation
 //  Data is loaded from:  data/company.js  |  data/implant.js
 // ═══════════════════════════════════════════════════════════════════
 
 const chatMessages = document.getElementById('chat-messages');
 const userInput    = document.getElementById('user-input');
 const sendButton   = document.getElementById('send-button');
+
+// ── Modal zoom state ───────────────────────────────────────────────
+const _z = { s: 1, x: 0, y: 0, drag: false, mx: 0, my: 0, pinch: 0 };
 
 // ── Folder paths (relative to index.html inside ode/) ─────────────
 const IMG = '../pictures/';  // all product/CEO/packing images
@@ -124,18 +127,19 @@ function buildProductCard(key) {
     const info = PRODUCT_DETAIL[key];
     if (!info) return '<p>Product information not found.</p>';
 
+    const zoomable = key === 'fixture' || key === 'surgical';
+    const zp = zoomable ? ',true' : '';
+
     const imgHtml = info.image
         ? info.sideImage
             ? `<div class="bot-product-img-row">
                 <img src="${IMG}${info.sideImage}" alt="${info.title}" class="bot-product-img-side"
-                     onclick="openImageModal('${IMG}${info.sideImage}','${info.title}')">
+                     onclick="openImageModal('${IMG}${info.sideImage}','${info.title}'${zp})">
                 <img src="${IMG}${info.image}" alt="${info.title}" class="bot-product-img-main"
-                     onclick="openImageModal('${IMG}${info.image}','${info.title}')">
-                <img src="${IMG}${info.sideImage}" alt="${info.title}" class="bot-product-img-side"
-                     onclick="openImageModal('${IMG}${info.sideImage}','${info.title}')">
+                     onclick="openImageModal('${IMG}${info.image}','${info.title}'${zp})">
                </div>`
             : `<img src="${IMG}${info.image}" alt="${info.title}" class="bot-product-image"
-                    onclick="openImageModal('${IMG}${info.image}','${info.title}')">`
+                    onclick="openImageModal('${IMG}${info.image}','${info.title}'${zp})">`
         : '';
     const featuresHtml = (info.specs || []).map(s => `<li>${s}</li>`).join('');
 
@@ -357,7 +361,7 @@ function showIntro() {
     ].map(t => `<span style="color:var(--denq-pink);font-weight:700;">✓</span> <em>${t}</em>`).join('<br>');
 
     setTimeout(() => appendMessage('<em>Welcome to DenQ Implant AI-assistant</em>', 'bot', true, false), 0);
-    setTimeout(() => appendMessage('<em>Here is what DenQy can do for you:</em>', 'bot', true, false), 1500); 
+    setTimeout(() => appendMessage('<em>Here is what DenQy can do for you:</em>', 'bot', true, false), 1500);
     setTimeout(() => appendMessage(checkHtml, 'bot', true, true), 2800);
     setTimeout(() => showMainMenu(), 3800);
 }
@@ -1035,19 +1039,35 @@ userInput.addEventListener('keypress', e => { if (e.key === 'Enter') handleSend(
 //  IMAGE MODAL
 // ═══════════════════════════════════════════════════════════════════
 
-function openImageModal(src, title) {
+function openImageModal(src, title, zoomable) {
     const modal     = document.getElementById('image-modal');
     const modalImg  = document.getElementById('modal-image');
     const captionEl = document.getElementById('modal-caption');
-    modal.style.display          = 'block';
+    const zoomBtns  = document.getElementById('modal-zoom-btns');
+
+    modal.style.display          = 'flex';
     modalImg.src                 = src;
     captionEl.textContent        = title;
     document.body.style.overflow = 'hidden';
+
+    _z.s = 1; _z.x = 0; _z.y = 0; _z.drag = false;
+    modalImg.style.transform  = '';
+    modalImg.style.transition = '';
+    modalImg.style.cursor     = zoomable ? 'zoom-in' : 'default';
+    modalImg.classList.toggle('zoomable', !!zoomable);
+    if (zoomBtns) zoomBtns.style.display = zoomable ? 'flex' : 'none';
 }
 
 function closeImageModal() {
-    document.getElementById('image-modal').style.display = 'none';
+    const modal    = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-image');
+    const zoomBtns = document.getElementById('modal-zoom-btns');
+    modal.style.display          = 'none';
     document.body.style.overflow = 'auto';
+    _z.s = 1; _z.x = 0; _z.y = 0; _z.drag = false;
+    modalImg.style.transform = '';
+    modalImg.classList.remove('zoomable');
+    if (zoomBtns) zoomBtns.style.display = 'none';
 }
 
 // ═══════════════════════════════════════════════════════════════════
@@ -1060,8 +1080,89 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.querySelector('.modal-close');
     if (closeBtn) closeBtn.addEventListener('click', closeImageModal);
 
-    const modal = document.getElementById('image-modal');
+    const modal    = document.getElementById('image-modal');
+    const modalImg = document.getElementById('modal-image');
     if (modal) modal.addEventListener('click', e => { if (e.target === modal) closeImageModal(); });
-
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeImageModal(); });
+
+    // ── Zoom helpers ───────────────────────────────────────────────
+    function applyZ() {
+        modalImg.style.transform  = `translate(${_z.x}px,${_z.y}px) scale(${_z.s})`;
+        modalImg.style.cursor     = _z.s > 1 ? (_z.drag ? 'grabbing' : 'grab') : 'zoom-in';
+    }
+
+    // Scroll-wheel zoom (laptop)
+    if (modalImg) modalImg.addEventListener('wheel', e => {
+        if (!modalImg.classList.contains('zoomable')) return;
+        e.preventDefault();
+        const step = e.deltaY < 0 ? 0.2 : -0.2;
+        _z.s = Math.min(Math.max(1, _z.s + step), 4);
+        if (_z.s === 1) { _z.x = 0; _z.y = 0; }
+        applyZ();
+    }, { passive: false });
+
+    // Zoom buttons
+    document.getElementById('zoom-in-btn')?.addEventListener('click', () => {
+        _z.s = Math.min(_z.s + 0.5, 4);
+        applyZ();
+    });
+    document.getElementById('zoom-out-btn')?.addEventListener('click', () => {
+        _z.s = Math.max(_z.s - 0.5, 1);
+        if (_z.s === 1) { _z.x = 0; _z.y = 0; }
+        applyZ();
+    });
+    document.getElementById('zoom-reset-btn')?.addEventListener('click', () => {
+        _z.s = 1; _z.x = 0; _z.y = 0;
+        modalImg.style.transform = '';
+        modalImg.style.cursor    = 'zoom-in';
+    });
+
+    // Drag to pan (when zoomed in)
+    if (modalImg) {
+        modalImg.addEventListener('mousedown', e => {
+            if (!modalImg.classList.contains('zoomable') || _z.s <= 1) return;
+            e.preventDefault();
+            _z.drag = true;
+            _z.mx   = e.clientX - _z.x;
+            _z.my   = e.clientY - _z.y;
+            modalImg.style.transition = 'none';
+        });
+    }
+    document.addEventListener('mousemove', e => {
+        if (!_z.drag) return;
+        _z.x = e.clientX - _z.mx;
+        _z.y = e.clientY - _z.my;
+        applyZ();
+    });
+    document.addEventListener('mouseup', () => {
+        if (!_z.drag) return;
+        _z.drag = false;
+        modalImg.style.transition = '';
+        if (modalImg.classList.contains('zoomable')) applyZ();
+    });
+
+    // Pinch-to-zoom (mobile)
+    if (modalImg) {
+        modalImg.addEventListener('touchstart', e => {
+            if (!modalImg.classList.contains('zoomable') || e.touches.length !== 2) return;
+            e.preventDefault();
+            _z.pinch = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+        }, { passive: false });
+
+        modalImg.addEventListener('touchmove', e => {
+            if (!modalImg.classList.contains('zoomable') || e.touches.length !== 2) return;
+            e.preventDefault();
+            const d = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+            _z.s = Math.min(Math.max(1, _z.s * (d / _z.pinch)), 4);
+            _z.pinch = d;
+            if (_z.s === 1) { _z.x = 0; _z.y = 0; }
+            applyZ();
+        }, { passive: false });
+    }
 });
