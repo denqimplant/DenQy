@@ -124,9 +124,18 @@ function buildProductCard(key) {
     const info = PRODUCT_DETAIL[key];
     if (!info) return '<p>Product information not found.</p>';
 
-    const imgHtml      = info.image
-        ? `<img src="${IMG}${info.image}" alt="${info.title}" class="bot-product-image"
-               onclick="openImageModal('${IMG}${info.image}','${info.title}')">`
+    const imgHtml = info.image
+        ? info.sideImage
+            ? `<div class="bot-product-img-row">
+                <img src="${IMG}${info.sideImage}" alt="${info.title}" class="bot-product-img-side"
+                     onclick="openImageModal('${IMG}${info.sideImage}','${info.title}')">
+                <img src="${IMG}${info.image}" alt="${info.title}" class="bot-product-img-main"
+                     onclick="openImageModal('${IMG}${info.image}','${info.title}')">
+                <img src="${IMG}${info.sideImage}" alt="${info.title}" class="bot-product-img-side"
+                     onclick="openImageModal('${IMG}${info.sideImage}','${info.title}')">
+               </div>`
+            : `<img src="${IMG}${info.image}" alt="${info.title}" class="bot-product-image"
+                    onclick="openImageModal('${IMG}${info.image}','${info.title}')">`
         : '';
     const featuresHtml = (info.specs || []).map(s => `<li>${s}</li>`).join('');
 
