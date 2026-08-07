@@ -357,7 +357,7 @@ function showIntro() {
     ].map(t => `<span style="color:var(--denq-pink);font-weight:700;">✓</span> <em>${t}</em>`).join('<br>');
 
     setTimeout(() => appendMessage('<em>Welcome to DenQ Implant AI-assistant</em>', 'bot', true, false), 0);
-    setTimeout(() => appendMessage('<em>Here is what DenQy can do for you:</em>', 'bot', true, false), 1500);
+    setTimeout(() => appendMessage('<em>Here is what DenQy can do for you:</em>', 'bot', true, false), 1500); 
     setTimeout(() => appendMessage(checkHtml, 'bot', true, true), 2800);
     setTimeout(() => showMainMenu(), 3800);
 }
