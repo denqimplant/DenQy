@@ -451,30 +451,32 @@ body {
 /* Full-width clean product image — no grey box */
 .bot-product-image {
     width: 100%;
-    height: clamp(130px, 20vw, 170px);
+    height: clamp(200px, 32vw, 260px);
     object-fit: contain;
     background: #f9f9f9;
     display: block;
     cursor: pointer;
     transition: transform 0.25s ease;
-    padding: 14px;
+    padding: 20px 28px;
     box-sizing: border-box;
     border-bottom: 1px solid #f0f0f0;
 }
 
 .bot-product-image:hover { transform: scale(1.04); }
 
-/* 3-image row: [side] [main] [side] */
+/* 2-image row: [side] [main] — both centered */
 .bot-product-img-row {
     display: flex;
     align-items: center;
+    justify-content: center;
     background: #f9f9f9;
     border-bottom: 1px solid #f0f0f0;
     width: 100%;
+    gap: 4px;
 }
 
 .bot-product-img-main {
-    flex: 2;
+    flex: 1.4;
     height: clamp(130px, 20vw, 170px);
     object-fit: contain;
     padding: 12px;
@@ -484,10 +486,10 @@ body {
 }
 
 .bot-product-img-side {
-    flex: 0.65;
-    height: clamp(65px, 10vw, 90px);
+    flex: 0.7;
+    height: clamp(130px, 20vw, 170px);
     object-fit: contain;
-    padding: 6px;
+    padding: 10px;
     box-sizing: border-box;
     cursor: pointer;
     opacity: 0.85;
@@ -1175,6 +1177,8 @@ body {
     width: 100%; height: 100%;
     background-color: rgba(0,0,0,0.85);
     backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-close {
@@ -1191,15 +1195,44 @@ body {
 .modal-close:hover { color: #f0f0f0; }
 
 .modal-image-content {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
     max-width: 90vw;
-    max-height: 85vh;
+    max-height: 80vh;
     object-fit: contain;
     border-radius: 18px;
     box-shadow: 0 24px 80px rgba(0,0,0,0.4);
+    transform-origin: center center;
+    transition: transform 0.12s ease;
+    user-select: none;
+    -webkit-user-drag: none;
 }
+
+.modal-zoom-btns {
+    position: absolute;
+    bottom: 72px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10001;
+}
+
+.zoom-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    font-size: 1.35rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    transition: background 0.18s, transform 0.12s;
+}
+.zoom-btn:hover { background: rgba(255,255,255,0.28); transform: scale(1.1); }
 
 .modal-caption {
     position: absolute;
