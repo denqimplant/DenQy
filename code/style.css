@@ -1,5 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
 
+@font-face {
+    font-family: 'PhetsarathOT';
+    src: url('../Phetsarath-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:lang(lo), .lang-lo-active * {
+    font-family: 'PhetsarathOT', 'Noto Sans Lao', sans-serif !important;
+}
+
 :root {
     --denq-pink: #EC6D75;
     --denq-dark: #EC6D75;
@@ -223,7 +234,6 @@ body {
 }
 
 .chat-header-badge {
-    margin-left: auto;
     background: #22c55e;
     border: 1px solid #16a34a;
     border-radius: 999px;
@@ -233,6 +243,79 @@ body {
     letter-spacing: 0.4px;
     color: #ffffff;
 }
+
+.lang-dropdown {
+    margin-left: auto;
+    position: relative;
+}
+
+.lang-trigger {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+    font-family: inherit;
+}
+.lang-trigger:hover { background: rgba(255,255,255,0.18); }
+.lang-trigger.open { background: rgba(255,255,255,0.22); border-color: rgba(255,255,255,0.7); }
+
+.lang-chevron {
+    font-size: 10px;
+    opacity: 0.8;
+    transition: transform 0.2s;
+}
+.lang-trigger.open .lang-chevron { transform: rotate(180deg); }
+
+.lang-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    overflow: hidden;
+    min-width: 160px;
+    z-index: 9999;
+    animation: langMenuIn 0.15s ease;
+}
+.lang-menu.open { display: block; }
+
+@keyframes langMenuIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1a1a2e;
+    transition: background 0.12s;
+    font-family: inherit;
+}
+.lang-option:hover { background: #f4f7f6; }
+.lang-option.lang-option-active { background: #fef0f1; color: #EC6D75; font-weight: 700; }
+
+.lang-opt-flag { font-size: 18px; line-height: 1; }
+.lang-opt-name { font-size: 13px; }
+.lang-option-lo .lang-opt-name { font-family: 'PhetsarathOT', sans-serif !important; font-size: 14px !important; }
+.lang-lo-active #lang-label { font-family: 'PhetsarathOT', sans-serif !important; }
 
 .chat-header-title,
 .chat-header span:not(.chat-header-badge) {
