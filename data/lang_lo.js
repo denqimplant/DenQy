@@ -171,7 +171,7 @@ window.LO = {
                 'ໄທເທນຽມເກຣດ 4',
                 'SLA Surface Treatment',
                 'Fixture + Cover Screw',
-                'ແຮງບິດ: 30-40 Ncm',
+                'Torque: 30~40 Ncm',
                 'ການດີໄຊທີ່ຄຸ້ມຄ່າ',
                 'Platform Switching',
                 'ຈຸດເຊື່ອມຕໍ່ຫົກຫຼ່ຽມດ້ານໃນຂະໜາດ 2.5 ມມ. (Internal Hex 2.5)',
