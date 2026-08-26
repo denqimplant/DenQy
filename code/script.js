@@ -10,6 +10,108 @@ const sendButton   = document.getElementById('send-button');
 // ── Modal zoom state ───────────────────────────────────────────────
 const _z = { s: 1, x: 0, y: 0, drag: false, mx: 0, my: 0, pinch: 0 };
 
+// ── Language ────────────────────────────────────────────────────────
+let LANG = 'en';
+
+function tr(en, loKey, ...args) {
+    if (LANG !== 'lo' || !window.LO) return en;
+    const v = window.LO[loKey];
+    if (v === undefined) return en;
+    return typeof v === 'function' ? v(...args) : v;
+}
+
+function getProductInfo(key) {
+    const base = PRODUCT_DETAIL[key];
+    if (LANG === 'lo' && window.LO?.products?.[key]) return { ...base, ...window.LO.products[key] };
+    return base;
+}
+function getEndoInfo(key) {
+    const base = ENDO_DETAIL[key];
+    if (LANG === 'lo' && window.LO?.endo?.[key]) return { ...base, ...window.LO.endo[key] };
+    return base;
+}
+function getPackingInfo(key) {
+    const base = PACKING_DETAIL[key];
+    if (LANG === 'lo' && window.LO?.packing?.[key]) return { ...base, ...window.LO.packing[key] };
+    return base;
+}
+function getLangFaq()         { return (LANG === 'lo' && window.LO?.faq) ? window.LO.faq : FAQ_CURATED; }
+function getLangCeoData()     { return (LANG === 'lo' && window.LO) ? { ...CEO_DATA, vision: window.LO.ceoVision || CEO_DATA.vision, highlights: window.LO.ceoHighlights || CEO_DATA.highlights } : CEO_DATA; }
+function getLangCompanyData() {
+    if (LANG !== 'lo' || !window.LO) return COMPANY_DATA;
+    return {
+        ...COMPANY_DATA,
+        name:         window.LO.companyName         || COMPANY_DATA.name,
+        address:      window.LO.companyAddress      || COMPANY_DATA.address,
+        mainBusiness: window.LO.companyMainBusiness || COMPANY_DATA.mainBusiness,
+        timeline:     window.LO.companyTimeline     || COMPANY_DATA.timeline,
+    };
+}
+
+function toggleLangDropdown() {
+    const trigger = document.getElementById('lang-trigger');
+    const menu = document.getElementById('lang-menu');
+    const open = menu.classList.toggle('open');
+    trigger.classList.toggle('open', open);
+}
+
+function selectLang(lang, flag, label) {
+    document.getElementById('lang-flag').textContent = flag;
+    document.getElementById('lang-label').textContent = label;
+    document.getElementById('lang-menu').classList.remove('open');
+    document.getElementById('lang-trigger').classList.remove('open');
+    document.querySelectorAll('.lang-option').forEach(btn => btn.classList.remove('lang-option-active'));
+    event.currentTarget.classList.add('lang-option-active');
+    switchLang(lang);
+}
+
+document.addEventListener('click', (e) => {
+    const dd = document.getElementById('lang-dropdown');
+    if (dd && !dd.contains(e.target)) {
+        document.getElementById('lang-menu')?.classList.remove('open');
+        document.getElementById('lang-trigger')?.classList.remove('open');
+    }
+});
+
+function switchLang(lang) {
+    LANG = lang;
+    document.body.classList.toggle('lang-lo-active', lang === 'lo');
+    document.getElementById('chat-messages').innerHTML = '';
+    const ig = document.querySelector('.input-guide-text');
+    if (ig) ig.textContent = lang === 'lo' ? (window.LO?.inputGuide || '') : '👆 Please use the buttons above to explore DenQ';
+    _updateRightPanel();
+    showIntro();
+}
+
+function _updateRightPanel() {
+    const lo = window.LO;
+    const isLo = LANG === 'lo' && !!lo;
+    const $ = (sel) => document.querySelector(sel);
+    const set = (sel, en, loVal) => { const el = $(sel); if (el) el.textContent = isLo ? (loVal || en) : en; };
+    const setHTML = (sel, en, loVal) => { const el = $(sel); if (el) el.innerHTML = isLo ? (loVal || en) : en; };
+
+    // ── Left sidebar ───────────────────────────────────────────────
+    set('.panel-tagline',         'High Precision Dental Implant', lo?.companyMainBusiness);
+    set('.side-categories-label', 'Product Categories',  lo?.sideCategories);
+    set('.side-lbl-fixture',      'DenQ Fixture',        lo?.sideFixture);
+    set('.side-lbl-cement',       'Cement Retained',     lo?.sideCement);
+    set('.side-lbl-screw',        'Screw Retained',      lo?.sideScrew);
+    set('.side-lbl-over',         'Overdenture',         lo?.sideOver);
+    set('.side-lbl-surgical',     'Surgical Kits',       lo?.sideSurgical);
+    set('.side-lbl-endo',         'Endo',                lo?.sideEndo);
+
+    // ── Right panel info ───────────────────────────────────────────
+    set('.rp-address',  'Busandaehak-ro 63beon-gil, Geumjeong-gu, Busan, Republic of Korea', lo?.companyAddress);
+    set('.rp-business', 'High-Precision Dental Implants', lo?.companyMainBusiness);
+
+    // ── Right panel catalog & contact ──────────────────────────────
+    set('.rp-catalog-title',        'Product Catalog',   lo?.rpCatalogTitle);
+    set('.rp-catalog-desc',         'Download our complete catalog & brochure for full product specifications and technical data.', lo?.rpCatalogDesc);
+    setHTML('.rp-dl-btn.primary',   '📥 Download Catalog',  lo?.rpDlCatalog);
+    setHTML('.rp-dl-btn.secondary', '📄 Download Brochure', lo?.rpDlBrochure);
+    set('.rp-contact-title',        'Customer Service',  lo?.rpService);
+}
+
 // ── Folder paths (relative to index.html inside ode/) ─────────────
 const IMG = '../pictures/';  // all product/CEO/packing images
 const PDF = '../';           // catalog & brochure PDFs
@@ -124,7 +226,7 @@ function showButtons(buttons, containerClass = '') {
 // ═══════════════════════════════════════════════════════════════════
 
 function buildProductCard(key) {
-    const info = PRODUCT_DETAIL[key];
+    const info = getProductInfo(key);
     if (!info) return '<p>Product information not found.</p>';
 
     const zoomable = key === 'fixture' || key === 'surgical';
@@ -211,7 +313,7 @@ function buildSizeCard(key) {
 }
 
 function buildCeoCard() {
-    const d = CEO_DATA;
+    const d = getLangCeoData();
     const imgHtml    = d.image
         ? `<img src="${IMG}${d.image}" alt="${d.name}" class="bot-founder-image"
                onclick="openImageModal('${IMG}${d.image}','${d.name}')"
@@ -241,7 +343,9 @@ function buildCeoCard() {
 }
 
 function buildCompanyCard() {
-    const d = COMPANY_DATA;
+    const d = getLangCompanyData();
+    const lo = window.LO?.companyInfo;
+    const lbl = (enText, loKey) => LANG === 'lo' && lo?.[loKey] ? lo[loKey] : enText;
     const timelineHtml = d.timeline.map(t => `
         <div class="timeline-entry">
             <div class="timeline-year">${t.year}</div>
@@ -251,16 +355,17 @@ function buildCompanyCard() {
         <div class="bot-history-card">
             <div class="bot-history-text">
                 <h3 class="bot-history-company">${d.name}</h3>
-                <p class="bot-history-vision">"${d.vision}"</p>
             </div>
-            <p class="company-about">${d.about}</p>
             <p class="company-meta">
-                <strong>📍 Location:</strong> ${d.location} &nbsp;|&nbsp;
-                <strong>📅 Founded:</strong> ${d.founded}
+                <strong>🏢 ${lbl('Company', 'label_company')}:</strong> ${d.name}
             </p>
-            <h4 class="section-heading">🎯 Our Mission</h4>
-            <p class="company-about">${d.mission}</p>
-            <h4 class="section-heading">📅 Company Timeline</h4>
+            <p class="company-meta">
+                <strong>🏭 ${lbl('Business', 'label_business')}:</strong> ${d.mainBusiness}
+            </p>
+            <p class="company-meta">
+                <strong>📍 ${lbl('Address', 'label_address')}:</strong> ${d.address}
+            </p>
+            <h4 class="section-heading">${lbl('📅 Company Timeline', 'label_timeline')}</h4>
             <div class="timeline-scroll">${timelineHtml}</div>
         </div>`;
 }
@@ -270,14 +375,14 @@ function buildCatalogCard() {
         <div class="bot-product-card">
             <div class="bot-product-card-header">
                 <div class="bot-product-copy" style="padding:0">
-                    <div class="bot-product-title">📋 DenQ Documents</div>
-                    <div class="bot-product-subtitle">Catalog &amp; Brochure Downloads</div>
+                    <div class="bot-product-title">${tr('📋 DenQ Documents', 'catalogTitle')}</div>
+                    <div class="bot-product-subtitle">${tr('Catalog &amp; Brochure Downloads', 'catalogSubtitle')}</div>
                 </div>
             </div>
             <div class="bot-product-body">
                 <div class="catalog-btn-group">
-                    <a href="${CATALOG_DATA.catalog}" target="_blank" class="catalog-dl-btn primary">Catalog</a>
-                    <a href="${CATALOG_DATA.brochure}" target="_blank" class="catalog-dl-btn secondary">Brochure</a>
+                    <a href="${CATALOG_DATA.catalog}"  target="_blank" class="catalog-dl-btn primary">${tr('Catalog', 'catalogBtn')}</a>
+                    <a href="${CATALOG_DATA.brochure}" target="_blank" class="catalog-dl-btn secondary">${tr('Brochure', 'brochureBtn')}</a>
                 </div>
             </div>
         </div>`;
@@ -288,21 +393,21 @@ function buildContactCard() {
         <div class="bot-product-card">
             <div class="bot-product-card-header">
                 <div class="bot-product-copy" style="padding:0">
-                    <div class="bot-product-title">📞 Contact DenQ</div>
-                    <div class="bot-product-subtitle"> We're here to help </div>
+                    <div class="bot-product-title">${tr('📞 Contact DenQ', 'contactTitle')}</div>
+                    <div class="bot-product-subtitle">${tr("We're here to help", 'contactSubtitle')}</div>
                 </div>
             </div>
             <div class="bot-product-body">
-                <a href="https://forms.gle/YqpKAZYyjtHKLxL49" target="_blank" class="contact-form-btn">Fill out the Form</a>
-                <div class="contact-row"><span class="contact-icon">💬</span><div class="contact-info"><span class="contact-label">WhatsApp (Consultation)</span><span class="contact-value"><a href="https://wa.me/821082109792" target="_blank">+82 10 8210 9792</a></span></div></div>
-                <div class="contact-row"><span class="contact-icon">📧</span><div class="contact-info"><span class="contact-label">Email</span><span class="contact-value"><a href="mailto:biz@denq.kr">biz@denq.kr</a></span></div></div>
-                <div class="contact-row"><span class="contact-icon">🌐</span><div class="contact-info"><span class="contact-label">Website</span><span class="contact-value"><a href="https://denq.kr" target="_blank">denq.kr</a></span></div></div>
+                <a href="https://forms.gle/YqpKAZYyjtHKLxL49" target="_blank" class="contact-form-btn">${tr('Fill out the Form', 'contactFormBtn')}</a>
+                <div class="contact-row"><span class="contact-icon">💬</span><div class="contact-info"><span class="contact-label">${tr('WhatsApp (Consultation)', 'contactWaLabel')}</span><span class="contact-value"><a href="https://wa.me/821082109792" target="_blank">+82 10 8210 9792</a></span></div></div>
+                <div class="contact-row"><span class="contact-icon">📧</span><div class="contact-info"><span class="contact-label">${tr('Email', 'contactEmailLbl')}</span><span class="contact-value"><a href="mailto:biz@denq.kr">biz@denq.kr</a></span></div></div>
+                <div class="contact-row"><span class="contact-icon">🌐</span><div class="contact-info"><span class="contact-label">${tr('Website', 'contactWebLbl')}</span><span class="contact-value"><a href="https://denq.kr" target="_blank">denq.kr</a></span></div></div>
             </div>
         </div>`;
 }
 
 function buildPackingCard(key) {
-    const info = PACKING_DETAIL[key];
+    const info = getPackingInfo(key);
     if (!info) return '<p>Packaging information not found.</p>';
     return `
         <div class="bot-product-card">
@@ -331,7 +436,7 @@ function toggleFaqItem(el) {
 }
 
 function buildFaqAccordion() {
-    const itemsHtml = FAQ_CURATED.map(item => `
+    const itemsHtml = getLangFaq().map(item => `
         <div class="faq-acc-item">
             <div class="faq-acc-question" onclick="toggleFaqItem(this)">
                 <span class="faq-acc-q-text">${item.q}</span>
@@ -343,7 +448,7 @@ function buildFaqAccordion() {
         </div>`).join('');
     return `
         <div class="faq-card">
-            <div class="faq-card-header">💡 Frequently Asked Questions</div>
+            <div class="faq-card-header">${tr('💡 Frequently Asked Questions', 'faqCardTitle')}</div>
             <div class="faq-acc-list">${itemsHtml}</div>
         </div>`;
 }
@@ -353,26 +458,27 @@ function buildFaqAccordion() {
 // ═══════════════════════════════════════════════════════════════════
 
 function showIntro() {
-    const checkHtml = [
+    const checks = (LANG === 'lo' && window.LO?.checks) ? window.LO.checks : [
         '24/7 Dental Implant Assistance',
         'Get Product Information in Seconds',
         'Instant Access to Catalogs &amp; Brochures',
         'Quick Answers to Your Product Questions',
-    ].map(t => `<span style="color:var(--denq-pink);font-weight:700;">✓</span> <em>${t}</em>`).join('<br>');
+    ];
+    const checkHtml = checks.map(c => `<span style="color:var(--denq-pink);font-weight:700;">✓</span> <em>${c}</em>`).join('<br>');
 
-    setTimeout(() => appendMessage('<em>Welcome to DenQ Implant AI-assistant</em>', 'bot', true, false), 0);
-    setTimeout(() => appendMessage('<em>Here is what DenQy can do for you:</em>', 'bot', true, false), 1500);
+    setTimeout(() => appendMessage(`<em>${tr('Welcome to DenQ Implant AI-assistant', 'welcome')}</em>`, 'bot', true, false), 0);
+    setTimeout(() => appendMessage(`<em>${tr('Here is what DenQy can do for you:', 'capabilites')}</em>`, 'bot', true, false), 1500);
     setTimeout(() => appendMessage(checkHtml, 'bot', true, true), 2800);
     setTimeout(() => showMainMenu(), 3800);
 }
 
 function showMainMenu() {
-    chatState.level          = 0;
-    chatState.section        = null;
-    chatState.subSection     = null;
-    chatState.currentProduct = null;
-
-    showButtons(MAIN_MENU.map(item => ({ label: item.label, onClick: item.onClick })), 'btn-chip-main-menu');
+    chatState.level = 0; chatState.section = null; chatState.subSection = null; chatState.currentProduct = null;
+    const lo = LANG === 'lo' && window.LO;
+    const labels = lo
+        ? [lo.menuProducts, lo.menuEndo, lo.menuCompany, lo.menuCerts, lo.menuCatalog, lo.menuFaqs, lo.menuContact]
+        : ['Products','Endo','Company','Certificates','Catalog','FAQs','Contact Us'];
+    showButtons(MAIN_MENU.map((item, i) => ({ label: labels[i] || item.label, onClick: item.onClick })), 'btn-chip-main-menu');
 }
 
 // ── Sidebar quick-link helper ──────────────────────────────────────
@@ -388,19 +494,13 @@ function sidebarNav(label, fn) {
 // ═══════════════════════════════════════════════════════════════════
 
 function showImplantMenu() {
-    chatState.level      = 1;
-    chatState.section    = 'implant';
-    chatState.subSection = null;
-
-    appendMessage('Please select a product to see full details:', 'bot', false);
-
-    const btns = IMPLANT_SUBMENU.map(item => ({
-        label:   item.label,
-        onClick: () => handleImplantProduct(item.key),
-    }));
+    chatState.level = 1; chatState.section = 'implant'; chatState.subSection = null;
+    appendMessage(tr('Please select a product to see full details:', 'selectProduct'), 'bot', false);
+    const submenu = (LANG === 'lo' && window.LO?.implantSubMenu) ? window.LO.implantSubMenu : IMPLANT_SUBMENU;
+    const btns = submenu.map(item => ({ label: item.label, onClick: () => handleImplantProduct(item.key) }));
     btns.push(
-        { label: 'Contact',   onClick: showContactInfo },
-        { label: 'Main Menu', onClick: showMainMenu    },
+        { label: tr('Contact', 'menuContact'),   onClick: showContactInfo },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu    },
     );
     showButtons(btns);
 }
@@ -421,27 +521,27 @@ function handleImplantProduct(key) {
 
 function showFixtureDetail() {
     chatState.currentProduct = 'fixture';
-    const info = PRODUCT_DETAIL['fixture'];
-    appendMessage(`Here is the ${info.title}.`, 'bot', false);
+    const info = getProductInfo('fixture');
+    appendMessage(tr(`Here is the ${info.title}.`, 'hereIs', info.title), 'bot', false);
     appendMessage(buildProductCard('fixture'), 'bot', true);
     showButtons([
-        { label: 'Screw',   onClick: () => showRelatedProduct('cement_screw',   showFixtureDetail) },
-        { label: 'Healing', onClick: () => showRelatedProduct('cement_healing', showFixtureDetail) },
-        { label: '◀ Back',              onClick: showImplantMenu  },
-        { label: 'Catalog',          onClick: showCatalogInfo  },
-        { label: 'Main Menu',        onClick: showMainMenu     },
+        { label: tr('Screw',     'btnScrew'),    onClick: () => showRelatedProduct('cement_screw',   showFixtureDetail) },
+        { label: tr('Healing',   'btnHealing'),  onClick: () => showRelatedProduct('cement_healing', showFixtureDetail) },
+        { label: tr('◀ Back',    'btnBack'),     onClick: showImplantMenu  },
+        { label: tr('Catalog',   'btnCatalog'),  onClick: showCatalogInfo  },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu     },
     ]);
 }
 
 function showRelatedProduct(key, backFn) {
     chatState.currentProduct = key;
-    const info = PRODUCT_DETAIL[key];
-    appendMessage(`Here is the ${info?.title}.`, 'bot', false);
+    const info = getProductInfo(key);
+    appendMessage(tr(`Here is the ${info?.title}.`, 'hereIs', info?.title), 'bot', false);
     appendMessage(buildProductCard(key), 'bot', true);
     showButtons([
-        { label: '◀ Back',       onClick: backFn          },
-        { label: 'Catalog',   onClick: showCatalogInfo },
-        { label: 'Main Menu', onClick: showMainMenu    },
+        { label: tr('◀ Back',    'btnBack'),     onClick: backFn          },
+        { label: tr('Catalog',   'btnCatalog'),  onClick: showCatalogInfo },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu    },
     ]);
 }
 
@@ -449,44 +549,25 @@ function showRelatedProduct(key, backFn) {
 
 function showCementSubMenu() {
     chatState.subSection = 'cement';
-    appendMessage('Please select a Cement Retained component:', 'bot', false);
-    const btns = CEMENT_ITEMS.map(item => ({
-        label:   item.label,
-        onClick: () => showImplantItemDetail(item.key, showCementSubMenu),
-    }));
-    btns.push(
-        { label: '◀ Back', onClick: showImplantMenu },
-        { label: 'Main Menu',       onClick: showMainMenu    },
-    );
+    appendMessage(tr('Please select a Cement Retained component:', 'selectCement'), 'bot', false);
+    const btns = CEMENT_ITEMS.map(item => ({ label: item.label, onClick: () => showImplantItemDetail(item.key, showCementSubMenu) }));
+    btns.push({ label: tr('◀ Back', 'btnBack'), onClick: showImplantMenu }, { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu });
     showButtons(btns);
 }
 
 function showScrewSubMenu() {
     chatState.subSection = 'screw';
-    appendMessage('Please select a Screw Retained component:', 'bot', false);
-    const btns = SCREW_ITEMS.map(item => ({
-        label:   item.label,
-        onClick: () => showImplantItemDetail(item.key, showScrewSubMenu),
-    }));
-    btns.push(
-        { label: '◀ Back', onClick: showImplantMenu },
-        { label: 'Main Menu',       onClick: showMainMenu    },
-    );
+    appendMessage(tr('Please select a Screw Retained component:', 'selectScrew'), 'bot', false);
+    const btns = SCREW_ITEMS.map(item => ({ label: item.label, onClick: () => showImplantItemDetail(item.key, showScrewSubMenu) }));
+    btns.push({ label: tr('◀ Back', 'btnBack'), onClick: showImplantMenu }, { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu });
     showButtons(btns);
 }
 
-
 function showOverdentureSubMenu() {
     chatState.subSection = 'overdenture';
-    appendMessage('Please select an Overdenture component:', 'bot', false);
-    const btns = OVERDENTURE_ITEMS.map(item => ({
-        label:   item.label,
-        onClick: () => showImplantItemDetail(item.key, showOverdentureSubMenu),
-    }));
-    btns.push(
-        { label: '◀ Back', onClick: showImplantMenu },
-        { label: 'Main Menu',       onClick: showMainMenu    },
-    );
+    appendMessage(tr('Please select an Overdenture component:', 'selectOverden'), 'bot', false);
+    const btns = OVERDENTURE_ITEMS.map(item => ({ label: item.label, onClick: () => showImplantItemDetail(item.key, showOverdentureSubMenu) }));
+    btns.push({ label: tr('◀ Back', 'btnBack'), onClick: showImplantMenu }, { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu });
     showButtons(btns);
 }
 
@@ -494,13 +575,13 @@ function showOverdentureSubMenu() {
 
 function showSurgicalDetail() {
     chatState.currentProduct = 'surgical';
-    const info = PRODUCT_DETAIL['surgical'];
-    appendMessage(`Here is the ${info.title}.`, 'bot', false);
+    const info = getProductInfo('surgical');
+    appendMessage(tr(`Here is the ${info.title}.`, 'hereIs', info.title), 'bot', false);
     appendMessage(buildProductCard('surgical'), 'bot', true);
     showButtons([
-        { label: '◀ Back',       onClick: showImplantMenu  },
-        { label: 'Catalog',   onClick: showCatalogInfo  },
-        { label: 'Main Menu', onClick: showMainMenu     },
+        { label: tr('◀ Back',    'btnBack'),     onClick: showImplantMenu  },
+        { label: tr('Catalog',   'btnCatalog'),  onClick: showCatalogInfo  },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu     },
     ]);
 }
 
@@ -508,13 +589,13 @@ function showSurgicalDetail() {
 
 function showImplantItemDetail(key, backFn) {
     chatState.currentProduct = key;
-    const info = PRODUCT_DETAIL[key];
-    appendMessage(`Here is the ${info?.title}.`, 'bot', false);
+    const info = getProductInfo(key);
+    appendMessage(tr(`Here is the ${info?.title}.`, 'hereIs', info?.title), 'bot', false);
     appendMessage(buildProductCard(key), 'bot', true);
     showButtons([
-        { label: '◀ Back',       onClick: backFn          },
-        { label: 'Catalog',   onClick: showCatalogInfo },
-        { label: 'Main Menu', onClick: showMainMenu    },
+        { label: tr('◀ Back',    'btnBack'),     onClick: backFn          },
+        { label: tr('Catalog',   'btnCatalog'),  onClick: showCatalogInfo },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu    },
     ]);
 }
 
@@ -523,7 +604,7 @@ function showImplantItemDetail(key, backFn) {
 // ═══════════════════════════════════════════════════════════════════
 
 function buildEndoCard(key) {
-    const info = ENDO_DETAIL[key];
+    const info = getEndoInfo(key);
     if (!info) return '<p>Product not found.</p>';
     const specsHtml = (info.specs || []).map(s => `<li>${s}</li>`).join('');
     return `
@@ -545,18 +626,12 @@ function buildEndoCard(key) {
 }
 
 function showEndoMenu() {
-    chatState.level      = 1;
-    chatState.section    = 'endo';
-    chatState.subSection = null;
-
-    appendMessage('Please select an Endo product:', 'bot', false);
-    const btns = ENDO_SUBMENU.map(item => ({
-        label:   item.label,
-        onClick: () => showEndoItemDetail(item.key),
-    }));
+    chatState.level = 1; chatState.section = 'endo'; chatState.subSection = null;
+    appendMessage(tr('Please select an Endo product:', 'selectEndo'), 'bot', false);
+    const btns = ENDO_SUBMENU.map(item => ({ label: item.label, onClick: () => showEndoItemDetail(item.key) }));
     btns.push(
-        { label: 'Contact',   onClick: showContactInfo },
-        { label: 'Main Menu', onClick: showMainMenu    },
+        { label: tr('Contact',   'btnContact'),  onClick: showContactInfo },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu    },
     );
     showButtons(btns);
 }
@@ -565,9 +640,9 @@ function showEndoItemDetail(key) {
     chatState.currentProduct = key;
     appendMessage(buildEndoCard(key), 'bot', true);
     showButtons([
-        { label: '◀ Back',       onClick: showEndoMenu    },
-        { label: 'Main Menu', onClick: showMainMenu    },
-        { label: 'Contact',   onClick: showContactInfo },
+        { label: tr('◀ Back',    'btnBack'),     onClick: showEndoMenu    },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu    },
+        { label: tr('Contact',   'btnContact'),  onClick: showContactInfo },
     ]);
 }
 
@@ -580,8 +655,8 @@ function showCatalogInfo() {
     chatState.section = 'catalog';
     appendMessage(buildCatalogCard(), 'bot', true);
     showButtons([
-        { label: 'Implant',   onClick: showImplantMenu },
-        { label: 'Main Menu', onClick: showMainMenu    },
+        { label: tr('Implant',   'btnImplant'),  onClick: showImplantMenu },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu    },
     ]);
 }
 
@@ -590,7 +665,8 @@ function showCatalogInfo() {
 // ═══════════════════════════════════════════════════════════════════
 
 function buildCompanyHistoryCard() {
-    const d = COMPANY_DATA;
+    const d = getLangCompanyData();
+    const ci = (LANG === 'lo' && window.LO?.companyInfo) || { label_company: 'Company', label_business: 'Business', label_address: 'Address', label_timeline: '📅 Company Timeline' };
     const timelineHtml = d.timeline.map(t => `
         <div class="timeline-entry">
             <div class="timeline-year">${t.year}</div>
@@ -599,54 +675,55 @@ function buildCompanyHistoryCard() {
     return `
         <div class="bot-history-card">
             <div class="company-info-row">
-                <span class="company-info-label">Company</span>
+                <span class="company-info-label">${ci.label_company}</span>
                 <span class="company-info-value">${d.name}</span>
             </div>
             <div class="company-info-row">
-                <span class="company-info-label">Business</span>
+                <span class="company-info-label">${ci.label_business}</span>
                 <span class="company-info-value">${d.mainBusiness}</span>
             </div>
             <div class="company-info-row">
-                <span class="company-info-label">Address</span>
+                <span class="company-info-label">${ci.label_address}</span>
                 <span class="company-info-value">${d.address}</span>
             </div>
-            <h4 class="section-heading" style="margin-top:16px;">📅 Company Timeline</h4>
+            <h4 class="section-heading" style="margin-top:16px;">${ci.label_timeline}</h4>
             <div class="timeline-scroll">${timelineHtml}</div>
         </div>`;
 }
 
 function showCompanyHistory() {
     chatState.section = 'company_history';
-    appendMessage(' DenQ Company History:', 'bot', false);
+    appendMessage(tr('DenQ Company History:', 'historyTitle'), 'bot', false);
     appendMessage(buildCompanyHistoryCard(), 'bot', true);
     showButtons([
-        { label: '◀ Back',       onClick: showCompanyProfile },
-        { label: 'Main Menu', onClick: showMainMenu       },
+        { label: tr('◀ Back',    'btnBack'),     onClick: showCompanyProfile },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu       },
     ]);
 }
 
 function buildCompanyRDCard() {
-    const rdItems = [
+    const items = (LANG === 'lo' && window.LO?.rdItems) ? window.LO.rdItems : [
         'Established a Cooperate R&D Center (2021)',
         'PCT International Patent — "Dental Implant Surface Treatment Method" (2022)',
         'Low-temperature Plasma Surface Treatment Tool for CNC Machines (2023)',
         'Cold Atmospheric Pressure Plasma Surface Modificaton Machine and Surface Modification Method (2023)',
         'Dental implant Surface Treatment Method (2024)',
-    ].map(a => `<li>${a}</li>`).join('');
+    ];
+    const heading = tr('R&D Achievements', 'rdHeading');
     return `
         <div class="bot-history-card">
-            <h4 class="section-heading"> R&D Achievements</h4>
-            <ul class="bot-history-highlights">${rdItems}</ul>
+            <h4 class="section-heading"> ${heading}</h4>
+            <ul class="bot-history-highlights">${items.map(a => `<li>${a}</li>`).join('')}</ul>
         </div>`;
 }
 
 function showCompanyRD() {
     chatState.section = 'company_rd';
-    appendMessage('DenQ Research and Development:', 'bot', false);
+    appendMessage(tr('DenQ Research and Development:', 'rdTitle'), 'bot', false);
     appendMessage(buildCompanyRDCard(), 'bot', true);
     showButtons([
-        { label: '◀ Back',       onClick: showCompanyProfile },
-        { label: 'Main Menu', onClick: showMainMenu       },
+        { label: tr('◀ Back',    'btnBack'),     onClick: showCompanyProfile },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu       },
     ]);
 }
 
@@ -654,7 +731,7 @@ function buildCompanyOrgCard() {
     return `
         <div class="bot-history-card" style="padding:0; overflow:hidden;">
             <div style="padding:14px 16px 10px; border-bottom:1px solid rgba(240,121,140,0.1);">
-                <div class="bot-product-title"> DenQ Organization Chart</div>
+                <div class="bot-product-title"> ${tr('DenQ Organization Chart', 'orgCardTitle')}</div>
             </div>
             <img src="${IMG}Organization.png" alt="DenQ Organization Chart"
                  class="org-chart-image"
@@ -664,11 +741,11 @@ function buildCompanyOrgCard() {
 
 function showCompanyOrg() {
     chatState.section = 'company_org';
-    appendMessage('DenQ Organization:', 'bot', false);
+    appendMessage(tr('DenQ Organization:', 'orgTitle'), 'bot', false);
     appendMessage(buildCompanyOrgCard(), 'bot', true);
     showButtons([
-        { label: '◀ Back',       onClick: showCompanyProfile },
-        { label: 'Main Menu', onClick: showMainMenu       },
+        { label: tr('◀ Back',    'btnBack'),     onClick: showCompanyProfile },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu       },
     ]);
 }
 
@@ -736,8 +813,8 @@ function buildExhibitionCard() {
         <div class="bot-product-card">
             <div class="bot-product-card-header">
                 <div class="bot-product-copy" style="padding:0">
-                    <div class="bot-product-title">🌍 Global Exhibition Presence</div>
-                    <div class="bot-product-subtitle">${total} exhibitions · ${countries} countries · 2019–2026</div>
+                    <div class="bot-product-title">${tr('🌍 Global Exhibition Presence', 'exhCardTitle')}</div>
+                    <div class="bot-product-subtitle">${tr(`${total} exhibitions · ${countries} countries · 2019–2026`, 'exhCardSubtitle', total, countries)}</div>
                 </div>
             </div>
             <div class="expo-timeline">${timelineHtml}</div>
@@ -746,24 +823,24 @@ function buildExhibitionCard() {
 
 function showCompanyExhibition() {
     chatState.section = 'company_exhibition';
-    appendMessage('DenQ Global Exhibition History:', 'bot', false);
+    appendMessage(tr('DenQ Global Exhibition History:', 'exhTitle'), 'bot', false);
     appendMessage(buildExhibitionCard(), 'bot', true);
     showButtons([
-        { label: '◀ Back',       onClick: showCompanyProfile },
-        { label: 'Main Menu', onClick: showMainMenu       },
+        { label: tr('◀ Back',    'btnBack'),     onClick: showCompanyProfile },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu       },
     ]);
 }
 
 function showCompanyProfile() {
     chatState.level   = 1;
     chatState.section = 'company';
-    appendMessage('Select a topic about DenQ:', 'bot', false);
+    appendMessage(tr('Select a topic about DenQ:', 'selectCompany'), 'bot', false);
     showButtons([
-        { label: 'History',      onClick: showCompanyHistory    },
-        { label: 'R&D',          onClick: showCompanyRD         },
-        { label: 'Organization', onClick: showCompanyOrg        },
-        { label: 'Exhibition',   onClick: showCompanyExhibition },
-        { label: 'Main Menu',    onClick: showMainMenu          },
+        { label: tr('History',      'coHistory'),    onClick: showCompanyHistory    },
+        { label: tr('R&D',          'coRD'),         onClick: showCompanyRD         },
+        { label: tr('Organization', 'coOrg'),        onClick: showCompanyOrg        },
+        { label: tr('Exhibition',   'coExhibition'), onClick: showCompanyExhibition },
+        { label: tr('Main Menu',    'btnMainMenu'),  onClick: showMainMenu          },
     ]);
 }
 
@@ -775,11 +852,11 @@ function showCompanyProfile() {
 function showOtherMenu() {
     chatState.level   = 1;
     chatState.section = 'faqs';
-    appendMessage('Here are the most asked questions about DenQ:', 'bot', false);
+    appendMessage(tr('Here are the most asked questions about DenQ:', 'faqTitle'), 'bot', false);
     appendMessage(buildFaqAccordion(), 'bot', true);
     showButtons([
-        { label: 'Contact',   onClick: showContactInfo },
-        { label: 'Main Menu', onClick: showMainMenu    },
+        { label: tr('Contact',   'btnContact'),  onClick: showContactInfo },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu    },
     ]);
 }
 
@@ -790,13 +867,13 @@ function showOtherMenu() {
 function showCertificateInfo() {
     chatState.level   = 1;
     chatState.section = 'certificate';
-    appendMessage("Here are DenQ's official certifications:", 'bot', false);
+    appendMessage(tr("Here are DenQ's official certifications:", 'certsTitle'), 'bot', false);
     appendMessage(`
         <div class="bot-product-card">
             <div class="bot-product-card-header">
                 <div class="bot-product-copy" style="padding:0">
-                    <div class="bot-product-title">🏅 DenQ Certificates</div>
-                    <div class="bot-product-subtitle">FDA · ISO 13485 · MFDS Approved</div>
+                    <div class="bot-product-title">${tr('🏅 DenQ Certificates', 'certsCardTitle')}</div>
+                    <div class="bot-product-subtitle">${tr('FDA · ISO 13485 · MFDS Approved', 'certsCardSubtitle')}</div>
                 </div>
             </div>
             <div class="bot-product-body" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
@@ -812,8 +889,8 @@ function showCertificateInfo() {
             </div>
         </div>`, 'bot', true);
     showButtons([
-        { label: 'Main Menu', onClick: showMainMenu    },
-        { label: 'Contact',   onClick: showContactInfo },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu    },
+        { label: tr('Contact',   'btnContact'),  onClick: showContactInfo },
     ]);
 }
 
@@ -824,8 +901,8 @@ function showCertificateInfo() {
 function showContactInfo() {
     appendMessage(buildContactCard(), 'bot', true);
     showButtons([
-        { label: 'Implant',   onClick: showImplantMenu },
-        { label: 'Main Menu', onClick: showMainMenu    },
+        { label: tr('Implant',   'btnImplant'),  onClick: showImplantMenu },
+        { label: tr('Main Menu', 'btnMainMenu'), onClick: showMainMenu    },
     ]);
 }
 
